@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Trebuchet MS, Tahoma, Verdana, Arial, PMingLiu, MingLiu, 微软雅黑,
+    "Microsoft YaHei", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+pre {
+  background: #000;
+  padding: 5px;
+}
+
+code {
+  font-family: consolas;
+  font-size: 13px;
+}
