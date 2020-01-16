@@ -1,5 +1,5 @@
 import * as React from 'react'
-import s, { keyframes } from 'styled-components'
+import s, {keyframes} from 'styled-components'
 
 const rotate = keyframes`
     0% {
@@ -71,22 +71,22 @@ const S = {
 
 const T: React.FC = () => {
     return <S.Content>
-        <S.Img src={'http://qzapp.qlogo.cn/qzapp/101503025/6933C7C5DAA700AA2037B297514E9DB4/100'}></S.Img>
+        <S.Img src={'http://qzapp.qlogo.cn/qzapp/101503025/6933C7C5DAA700AA2037B297514E9DB4/100'}/>
         <S.Box>
-            <i className={'iconfont icon-publish'}></i>
+            <i className={'iconfont icon-publish'}/>
             <S.BoxText>Publish</S.BoxText>
         </S.Box>
         <S.Box>
-            <i className={'iconfont icon-huifu'}></i>
+            <i className={'iconfont icon-huifu'}/>
             <S.BoxText>Message</S.BoxText>
-            <S.Tips />
+            <S.Tips/>
         </S.Box>
         <S.Box>
-            <i className={'iconfont icon-go__icon_like-'}></i>
+            <i className={'iconfont icon-go__icon_like-'}/>
             <S.BoxText>Like</S.BoxText>
         </S.Box>
         <S.Box>
-            <i className={'iconfont icon-exit1'}></i>
+            <i className={'iconfont icon-exit1'}/>
             <S.BoxText>Exit</S.BoxText>
         </S.Box>
     </S.Content>
