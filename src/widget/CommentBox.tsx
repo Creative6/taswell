@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect} from 'react'
 import s from 'styled-components'
-import { SET_COMMENT_SAVE, GET_COMMENTS } from '../api'
+import {SET_COMMENT_SAVE, GET_COMMENTS} from '../api'
 import Dot from './Dot'
 
 const S: any = {
@@ -98,20 +98,20 @@ const S: any = {
 
 const T: React.FC = (props: any) => {
     const [aid, setAid] = useState('')
-    const [tragetUid, setTragetUid] = useState('')
+    const [targetUid, setTargetUid] = useState('')
     const [content, setContent] = useState('')
     const [list, setList] = useState<any>([])
 
     useEffect(() => {
-        console.log({ props })
-        const { id, uid } = props
+        console.log({props})
+        const {id, uid} = props
         setAid(id)
-        setTragetUid(uid)
+        setTargetUid(uid)
         getComments(id)
     }, [props])
 
     const getComments = (id: any) => {
-        GET_COMMENTS({ id }).then(rs => {
+        GET_COMMENTS({id}).then(rs => {
             setList(rs)
             setContent('')
         })
@@ -122,17 +122,24 @@ const T: React.FC = (props: any) => {
             <S.SB1>
                 <S.TextArea
                     placeholder={'Leave an interesting comment!'}
-                    onChange={(e: any) => { setContent(e.target.value) }}
+                    onChange={(e: any) => {
+                        setContent(e.target.value)
+                    }}
                     value={content}
-                ></S.TextArea>
+                />
                 <S.FucBox>
                     <S.FucBoxLeft>
-                        <S.Icon className={'iconfont icon-biaoqing'}></S.Icon>
-                        <S.Icon className={'iconfont icon-code1'}></S.Icon>
+                        <S.Icon className={'iconfont icon-biaoqing'}/>
+                        <S.Icon className={'iconfont icon-code1'}/>
                     </S.FucBoxLeft>
                     <S.FucBoxRight onClick={() => {
-                        console.log({ aid, tragetUid, content, uid: '056C7015293CC3AC8C4E5C75F0ACF24A' })
-                        SET_COMMENT_SAVE({ aid, tragetUid, content: content.substring(0, 200), uid: '056C7015293CC3AC8C4E5C75F0ACF24A' }).then(rs => {
+                        console.log({aid, targetUid, content, uid: '056C7015293CC3AC8C4E5C75F0ACF24A'})
+                        SET_COMMENT_SAVE({
+                            aid,
+                            targetUid,
+                            content: content.substring(0, 200),
+                            uid: '056C7015293CC3AC8C4E5C75F0ACF24A'
+                        }).then(rs => {
                             console.log(rs)
                             getComments(props.id)
                         })
@@ -147,14 +154,14 @@ const T: React.FC = (props: any) => {
                     list.map((item: any, index: any) => {
                         return (
                             <S.List key={index}>
-                                <S.ListIcon src={item.avatar_url} />
+                                <S.ListIcon src={item.avatar_url}/>
                                 <S.ListBox>
                                     <S.ListBoxTop>
                                         {item.name}
-                                        <Dot />
+                                        <Dot/>
                                         {item.create_time}
                                     </S.ListBoxTop>
-                                    <S.ListBoxBottom dangerouslySetInnerHTML={{ __html: item.content }} />
+                                    <S.ListBoxBottom dangerouslySetInnerHTML={{__html: item.content}}/>
                                 </S.ListBox>
                             </S.List>
                         )

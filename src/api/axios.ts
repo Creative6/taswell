@@ -1,6 +1,7 @@
 import axios from "axios";
 import qs from "querystring";
 // import codeMessage from "./codeMessage";
+import Cookies from 'js-cookie'
 
 let DOMAIN = "";
 if (process.env.NODE_ENV === "development") {
@@ -14,8 +15,8 @@ axios.defaults.baseURL = DOMAIN + "/blog";
 axios.defaults.timeout = 10000;
 
 axios.interceptors.request.use(config => {
-  const token = 'Cookies.get("token")';
-  token && (config.headers.Authorization = token);
+  const authorization = Cookies.get("twa");
+  authorization && (config.headers.Authorization = authorization);
   return config;
 });
 
