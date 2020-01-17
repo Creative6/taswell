@@ -109,7 +109,7 @@ const T: React.FC = () => {
     }, [])
 
     return <S.Content>
-        {userInfo.ic1on ? <>
+        {userInfo.icon ? <>
             <S.Img src={userInfo.icon}/>
             <S.Box>
                 <i className={'iconfont icon-publish'}/>
@@ -128,7 +128,12 @@ const T: React.FC = () => {
                 <i className={'iconfont icon-go__icon_like-'}/>
                 <S.BoxText>Like</S.BoxText>
             </S.Box>
-            <S.Box>
+            <S.Box
+                onClick={() => {
+                    Cookies.remove('twa')
+                    window.location.reload()
+                }}
+            >
                 <i className={'iconfont icon-exit1'}/>
                 <S.BoxText>Exit</S.BoxText>
             </S.Box>
