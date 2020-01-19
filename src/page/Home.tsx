@@ -3,6 +3,7 @@ import s from 'styled-components'
 import ArticleList from '../widget/ArticleList'
 import PersonActiveRankings from '../widget/PersonActiveRankings'
 import NewsPopularity from '../widget/NewsPopularity'
+import Publish from '../widget/Publish'
 import My from '../widget/My'
 
 const S: any = {
@@ -36,18 +37,19 @@ const T: React.FC = () => {
     return (
         <>
             <S.BodyLeft>
-                <ArticleList />
+                <Publish/>
+                <ArticleList/>
             </S.BodyLeft>
             <S.BodyRight>
                 <S.MyBox>
-                    <My />
+                    <My/>
                 </S.MyBox>
                 <S.StickyBox>
                     <S.StickyBoxChild>
-                        <NewsPopularity />
+                        <NewsPopularity/>
                     </S.StickyBoxChild>
                     <S.StickyBoxChild>
-                        <PersonActiveRankings />
+                        <PersonActiveRankings/>
                     </S.StickyBoxChild>
                 </S.StickyBox>
             </S.BodyRight>

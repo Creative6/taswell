@@ -138,7 +138,6 @@ const T: React.FC = (props: any) => {
                             aid,
                             targetUid,
                             content: content.substring(0, 200),
-                            uid: '056C7015293CC3AC8C4E5C75F0ACF24A'
                         }).then(rs => {
                             console.log(rs)
                             getComments(props.id)

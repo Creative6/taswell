@@ -68,7 +68,7 @@ const T: React.FC = () => {
     const [list, setList] = useState<any>([])
 
     useEffect(() => {
-        GET_NOTICES({uid: '431D0A5206FC5920E93584CC239874C0'}).then(rs => {
+        GET_NOTICES().then(rs => {
             setList(rs)
         })
     }, [])

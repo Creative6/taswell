@@ -69,3 +69,16 @@ export function post(url: any, params: any) {
             });
     });
 }
+
+export function fileUpload(url: any, params: any) {
+    return new Promise((resolve, reject) => {
+        let config = {headers: {'Content-Type': 'multipart/form-data'}}
+        axios.post(url, params, config)
+            .then(res => {
+                resolve(res.data);
+            })
+            .catch(err => {
+                reject({err});
+            });
+    });
+}
