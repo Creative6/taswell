@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, {useState, useEffect} from 'react'
 import s from 'styled-components'
 import ArticleList from '../widget/ArticleList'
 import PersonActiveRankings from '../widget/PersonActiveRankings'
@@ -24,7 +24,7 @@ const S: any = {
       top: 20px;
     `,
     StickyBoxChild: s.div`
-      margin-top: 20px;
+      margin-top: 15px;
       background: #fff;
     `,
     MyBox: s.div`
@@ -34,10 +34,24 @@ const S: any = {
 }
 
 const T: React.FC = () => {
+    const [showPublish, _showPublish] = useState<any>(false)
+
+    useEffect(() => {
+        // @ts-ignore
+        alert.showPublish = () => {
+            _showPublish(true)
+        }
+
+        // @ts-ignore
+        alert.hidePublish = () => {
+            _showPublish(false)
+        }
+    }, [])
+
     return (
         <>
             <S.BodyLeft>
-                <Publish/>
+                {showPublish && <Publish/>}
                 <ArticleList/>
             </S.BodyLeft>
             <S.BodyRight>

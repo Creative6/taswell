@@ -59,9 +59,11 @@ const T: React.FC = (props: any) => {
         name,
         create_time,
         preview_content,
+        preview_img,
         comment_num,
         id,
-        simple
+        simple,
+        tag = ''
     } = props
 
     return (
@@ -77,6 +79,50 @@ const T: React.FC = (props: any) => {
                     <div><S.CommentNum>{comment_num}</S.CommentNum>comment{comment_num > 1 && 's'}</div>}
                 </S.Information>
                 {!simple && <S.PreviewContent dangerouslySetInnerHTML={{__html: preview_content}}/>}
+                {
+                    !simple && preview_img &&
+                    <div style={{marginTop: 5, overflow: 'hidden'}}>
+                        {preview_img.length > 0 &&
+                        preview_img.slice(0, 9).map((item: any, index: any) =>
+                            <div key={index} style={{
+                                width: 200,
+                                height: 200,
+                                background: '#000',
+                                float: 'left',
+                                marginRight: 5,
+                                marginBottom: 5,
+                                overflow: 'hidden',
+                                position: 'relative',
+                            }}>
+                                <img src={item} onError={(e: any) => {
+                                    e.target.onerror = null
+                                    e.target.src = 'http://thirdqq.qlogo.cn/g?b=oidb&k=FkqZfqXSogrKiagwYFJVZ3g&s=100'
+                                }} alt="" style={{
+                                    position: 'absolute',
+                                    left: '50%',
+                                    top: '50%',
+                                    transform: 'translate(-50%,-50%)',
+                                    width: '100%'
+                                }}/>
+                            </div>
+                        )
+                        }
+                    </div>
+                }
+                <div style={{overflow: 'hidden'}}>
+                    {
+                        tag && tag.split('|').map((item: any, index: any) => <div key={index} style={{
+                            background: '#000',
+                            color: '#ccc',
+                            float: 'left',
+                            fontSize: 13,
+                            height: 20,
+                            lineHeight: '20px',
+                            padding: '0px 10px',
+                            marginRight: 5
+                        }}>{item}</div>)
+                    }
+                </div>
             </S.Box>
         </S.Content>
     )

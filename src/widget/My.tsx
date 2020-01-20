@@ -111,7 +111,12 @@ const T: React.FC = () => {
     return <S.Content>
         {userInfo.icon ? <>
             <S.Img src={userInfo.icon}/>
-            <S.Box>
+            <S.Box
+                onClick={() => {
+                    // @ts-ignore
+                    alert.showPublish()
+                }}
+            >
                 <i className={'iconfont icon-publish'}/>
                 <S.BoxText>Publish</S.BoxText>
             </S.Box>
