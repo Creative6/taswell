@@ -68,7 +68,10 @@ const T: React.FC = (props: any) => {
 
     return (
         <S.Content>
-            <S.Imgbox><S.Img src={avatar_url}/></S.Imgbox>
+            <S.Imgbox><S.Img src={avatar_url} onError={(e: any) => {
+                e.target.onerror = null
+                e.target.src = 'http://thirdqq.qlogo.cn/g?b=oidb&k=FkqZfqXSogrKiagwYFJVZ3g&s=100'
+            }}/></S.Imgbox>
             <S.Box>
                 <S.Title onClick={() => {
                     window.open(`#/article/${id}`)

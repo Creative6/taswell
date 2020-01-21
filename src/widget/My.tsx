@@ -97,10 +97,10 @@ const T: React.FC = () => {
         try {
             // @ts-ignore
             const data = jwt(Cookies.get('twa'))
-            console.log(data)
+            // console.log(data)
             setUserInfo(data)
             GET_NOTICE_NUM().then(rs => {
-                console.log('GET_NOTICE_NUM', rs)
+                // console.log('GET_NOTICE_NUM', rs)
                 setNoticeNum(rs)
             })
         } catch (e) {

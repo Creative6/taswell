@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === "development") {
 
 axios.defaults.baseURL = DOMAIN + "/blog";
 
-axios.defaults.timeout = 10000;
+axios.defaults.timeout = 1000 * 60 * 2;
 
 axios.interceptors.request.use(config => {
     const authorization = Cookies.get("twa");
@@ -42,7 +42,7 @@ axios.interceptors.response.use(
 );
 
 export function get(url: any, params: any) {
-    console.log({url, params});
+    // console.log({url, params});
     return new Promise((resolve, reject) => {
         axios
             .get(url, {

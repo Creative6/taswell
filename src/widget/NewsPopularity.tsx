@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react"
+import React, {useEffect, useState} from "react"
 import s from 'styled-components'
-import { GET_ARTICLE_POPULARITY } from '../api'
+import {GET_ARTICLE_POPULARITY} from '../api'
 import NumberDot from './NumberDot'
 
 const S = {
@@ -49,9 +49,11 @@ const T: React.FC = () => {
         <>
             <S.Title>NewsPopularity</S.Title>
             {data && data.map((item: any, index: number) => {
-                return <S.Item key={index}>
-                    <div style={{ display: 'flex' }} title={item.title}>
-                        <NumberDot num={index + 1} />
+                return <S.Item key={index} onClick={() => {
+                    window.open(`#/article/${item.id}`)
+                }}>
+                    <div style={{display: 'flex'}} title={item.title}>
+                        <NumberDot num={index + 1}/>
                         <S.TitleWarp>{item.title}</S.TitleWarp>
                     </div>
                     <div><S.Num>{item.count}</S.Num> comments</div>

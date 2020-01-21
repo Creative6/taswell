@@ -10,3 +10,4 @@ export const GET_NOTICES = (para?: any) => get("/notices", para);
 export const GET_NOTICE_NUM = (para?: any) => get("/notice_num", para);
 export const UPLOAD = (para?: any) => fileUpload("/upload", para);
 export const SET_ARTICLE_SAVE = (para?: any) => get("/save", para);
+export const SET_NOTICE_READ = (para?: any) => get("/notice_read", para);

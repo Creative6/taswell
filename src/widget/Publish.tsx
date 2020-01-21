@@ -111,6 +111,7 @@ const T: React.FC = (props: any) => {
     const myUploadFn = (param: any) => {
         var fd = new FormData()
         fd.append('file', param.file)
+        console.log('UPLOAD START')
         UPLOAD(fd).then(res => {
             param.success({url: res})
         })
@@ -198,8 +199,9 @@ const T: React.FC = (props: any) => {
                                    const arr = JSON.parse(editorState.toRAW())
                                    const {entityMap} = arr
                                    for (let key in entityMap) {
-                                       let url = entityMap[key].data.url
-                                       if (url && url.indexOf('rs.creative6.cn') >= 0) {
+                                       const url = entityMap[key].data.url
+                                       const type = entityMap[key].type
+                                       if (url && type === "IMAGE") {
                                            preview_img.push(url + '?x-oss-process=style/small')
                                        }
                                    }

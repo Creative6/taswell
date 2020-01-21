@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react'
 import s from 'styled-components'
 import Dot from "../widget/Dot";
 import {GET_NOTICES} from '../api'
-import {useHistory} from "react-router";
+import {useHistory} from "react-router"
+import {SET_NOTICE_READ} from '../api'
 
 const S: any = {
     Content: s.div`
@@ -88,8 +89,10 @@ const T: React.FC = () => {
                             <S.ListBoxBottom>
                                 <S.PreyText>在</S.PreyText>
                                 <S.Link onClick={() => {
-                                    history.push(`/article/${item.aid}`)
-                                }}>{item.title}</S.Link>
+                                    SET_NOTICE_READ({id: item.id}).then((rs: any) => {
+                                        history.push(`/article/${item.aid}`)
+                                    })
+                                }}>{item.title || 'NOTHING'}</S.Link>
                                 <S.PreyText>中评论:</S.PreyText>
                             </S.ListBoxBottom>
                             <S.ContentText>{item.content}</S.ContentText>

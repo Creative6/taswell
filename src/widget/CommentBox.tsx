@@ -16,6 +16,8 @@ const S: any = {
     font-family: unset;
     height: 100px;
     resize: none;
+    border: 5px solid #ddd;
+    border-bottom: none;
     `,
     FucBox: s.div`
     display: flex;
@@ -73,6 +75,7 @@ const S: any = {
     `,
     ListBox: s.div`
     flex: 1 1 0%;
+    overflow: hidden;
     `,
     ListBoxTop: s.div`
     font-size: 12px;
@@ -103,7 +106,7 @@ const T: React.FC = (props: any) => {
     const [list, setList] = useState<any>([])
 
     useEffect(() => {
-        console.log({props})
+        // console.log({props})
         const {id, uid} = props
         setAid(id)
         setTargetUid(uid)
@@ -133,13 +136,11 @@ const T: React.FC = (props: any) => {
                         <S.Icon className={'iconfont icon-code1'}/>
                     </S.FucBoxLeft>
                     <S.FucBoxRight onClick={() => {
-                        console.log({aid, targetUid, content, uid: '056C7015293CC3AC8C4E5C75F0ACF24A'})
                         SET_COMMENT_SAVE({
                             aid,
                             targetUid,
                             content: content.substring(0, 200),
                         }).then(rs => {
-                            console.log(rs)
                             getComments(props.id)
                         })
                     }}>PUBLISH</S.FucBoxRight>
@@ -153,7 +154,10 @@ const T: React.FC = (props: any) => {
                     list.map((item: any, index: any) => {
                         return (
                             <S.List key={index}>
-                                <S.ListIcon src={item.avatar_url}/>
+                                <S.ListIcon src={item.avatar_url} onError={(e: any) => {
+                                    e.target.onerror = null
+                                    e.target.src = 'http://thirdqq.qlogo.cn/g?b=oidb&k=FkqZfqXSogrKiagwYFJVZ3g&s=100'
+                                }}/>
                                 <S.ListBox>
                                     <S.ListBoxTop>
                                         {item.name}
