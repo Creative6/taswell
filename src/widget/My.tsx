@@ -135,7 +135,7 @@ const T: React.FC = () => {
             </S.Box>
             <S.Box
                 onClick={() => {
-                    Cookies.remove('twa')
+                    Cookies.remove('twa', {path: '/', domain: '.taswell.cn'})
                     window.location.reload()
                 }}
             >

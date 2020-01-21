@@ -33,7 +33,7 @@ axios.interceptors.response.use(
         const {response} = error
         const {status} = response
         if (status === 401) {
-            Cookies.remove('twa')
+            Cookies.remove('twa', {path: '/', domain: '.taswell.cn'})
             window.location.replace('/')
             window.location.reload()
         }
