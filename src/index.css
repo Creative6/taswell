@@ -31,3 +31,7 @@ video {
     max-width: 100%;
 }
 
+.bf-content{
+    height: calc(100vh - 320px) !important;
+}
+

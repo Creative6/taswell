@@ -1,0 +1,61 @@
+@业务管理中心[http://172.30.212.183:9999/flower/build]
+	>成交意向
+		>成交意向详情
+			>成交意向信息: 首行增加信息来源(手拉手任务/预约任务)
+	>管理
+		>成交意向管理
+			>成交意向详情
+				>>成交意向信息: 首行增加信息来源(手拉手任务/预约任务)
+	>社区顾问管理中心
+		>预约任务
+			>所有列表(总任务,待接单,带上门,已完结,24小时未填写):在"是否已转发飞虎单"字段为已转换的情况下,详情不可进入
+			>总任务列表
+				>查询栏:预约任务状态中删除"已转派飞虎任务"一个状态
+	>签约任务
+		>签约任务详情
+			>处理任务,返回时保留内容
+			>错误时返回提示信息
+
+@志愿者工作平台[http://172.30.212.183:9999/cp/build]
+	>摄影师中心
+		>列表(待接单,待拍摄,待审核)
+			>拍摄任务详情
+				>修改房源
+					>第三步"上传图片":
+						1.接口更替
+							- */api/v3/worker/photographer/st_task/photo/sort
+							- */api/v3/worker/photographer/st_task/photo/upload
+							- */api/v3/worker/photographer/st_task/photo/delete
+							- */api/v3/worker/photographer/st_task/photo/edit
+							- 更替为:
+							- */api/v3/photo/sort
+							- */api/v3/photo/upload
+							- */api/v3/photo/delete
+							- */api/v3/photo/edit
+							& 可能影响功能:[图片上传,图片排序,图片添加描述,图片删除]
+						2.文件名修改
+							- 规则pic = 时间戳 + "_" + guid();
+							& 可能影响功能:[图片上传]
+	>社区顾问中心
+		>飞虎任务
+			>待处理列表
+				>详情页(任务来源:"帮我联系房东")
+					>处理任务(找房状态:"找房成功")
+						>图片:
+							1.接口更替
+								- */api/v3/worker/adviser/bs_task/photo/sort
+								- */api/v3/worker/adviser/bs_task/photo/upload
+								- */api/v3/worker/adviser/bs_task/photo/delete
+								- 更替为:
+								- */api/v3/photo/sort
+								- */api/v3/photo/upload
+								- */api/v3/photo/delete
+								& 可能影响功能:[图片上传,图片排序,图片删除]
+							2.文件名修改
+								- 规则pic = 时间戳 + "_" + guid();
+								& 可能影响功能:[图片上传]
+					>切换找房状态的时候,清空填写内容
+		>预约任务
+			>待处理列表	
+				>预约信息中"交易员姓名"更正为"专属交易员姓名"
+				>修改房源信息,日期增加check

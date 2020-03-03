@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import s from 'styled-components'
 import BraftEditor from 'braft-editor'
 import 'braft-editor/dist/index.css'
-import {UPLOAD, SET_ARTICLE_SAVE} from '../api'
+import { UPLOAD, SET_ARTICLE_SAVE } from '../api'
 
 const S = {
     Content: s.div`
@@ -99,6 +99,13 @@ const S = {
             font-size: 12px;
             cursor: pointer;
         }
+    `,
+    Tips: s.div`
+        text-align: center;
+        font-size: 12px;
+        color: #bbb;
+        overflow: hidden;
+        width: 100%;
     `
 }
 
@@ -111,9 +118,8 @@ const T: React.FC = (props: any) => {
     const myUploadFn = (param: any) => {
         var fd = new FormData()
         fd.append('file', param.file)
-        console.log('UPLOAD START')
         UPLOAD(fd).then(res => {
-            param.success({url: res})
+            param.success({ url: res })
         })
     }
 
@@ -142,7 +148,7 @@ const T: React.FC = (props: any) => {
             </S.ContentLeft>
             <S.ContentRight>
                 <S.TagBox>
-                    <div style={{position: 'relative'}}>
+                    <div style={{ position: 'relative' }}>
                         <S.Input2
                             type="text"
                             placeholder={'Tag'}
@@ -153,6 +159,7 @@ const T: React.FC = (props: any) => {
                         />
                         <S.AddBtn
                             onClick={() => {
+                                if (!tagText || tag.length === 10) return
                                 const tag_temp = JSON.parse(JSON.stringify(tag))
                                 tag_temp.push(tagText)
                                 _tag(tag_temp)
@@ -162,7 +169,7 @@ const T: React.FC = (props: any) => {
                             <i className={'iconfont icon-moreunfold'}></i>
                         </S.AddBtn>
                     </div>
-                    <div style={{paddingTop: 10}}>
+                    <div style={{ paddingTop: 10 }}>
                         {
                             tag.map((item: any, index: any) => {
                                 return <S.List key={index}>
@@ -178,8 +185,8 @@ const T: React.FC = (props: any) => {
                                 </S.List>
                             })
                         }
-
                     </div>
+                    <S.Tips>- Add up to 10 tags -</S.Tips>
                 </S.TagBox>
                 <S.BtnBox>
                     <S.Btn
@@ -193,31 +200,30 @@ const T: React.FC = (props: any) => {
                         }}
                     >Cancel</S.Btn>
                     <S.Btn title={'confirm'}
-                           onClick={() => {
-                               let preview_img = []
-                               try {
-                                   const arr = JSON.parse(editorState.toRAW())
-                                   const {entityMap} = arr
-                                   for (let key in entityMap) {
-                                       const url = entityMap[key].data.url
-                                       const type = entityMap[key].type
-                                       if (url && type === "IMAGE") {
-                                           preview_img.push(url + '?x-oss-process=style/small')
-                                       }
-                                   }
-                               } catch (e) {
+                        onClick={() => {
+                            let preview_img = []
+                            try {
+                                const arr = JSON.parse(editorState.toRAW())
+                                const { entityMap } = arr
+                                for (let key in entityMap) {
+                                    let url = entityMap[key].data.url
+                                    if (url && url.indexOf('rs.creative6.cn') >= 0) {
+                                        preview_img.push(url + '?x-oss-process=style/small')
+                                    }
+                                }
+                            } catch (e) {
 
-                               }
-                               SET_ARTICLE_SAVE({
-                                   title,
-                                   content: editorState.toHTML(),
-                                   preview_img,
-                                   preview_content: editorState.toText().substr(0, 200),
-                                   tag
-                               }).then(rs => {
-                                   window.location.reload()
-                               })
-                           }}
+                            }
+                            SET_ARTICLE_SAVE({
+                                title,
+                                content: editorState.toHTML(),
+                                preview_img: JSON.stringify(preview_img),
+                                preview_content: editorState.toText().substr(0, 200),
+                                tag: tag.join("|")
+                            }).then(rs => {
+                                window.location.reload()
+                            })
+                        }}
                     >Comfirm</S.Btn>
                 </S.BtnBox>
             </S.ContentRight>
