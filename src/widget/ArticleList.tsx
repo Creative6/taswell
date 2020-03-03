@@ -29,7 +29,7 @@ const T: React.FC = () => {
 
     return (
         <>
-            {list && list.map((item: any) => <ArticleItem key={item.id} {...item}>{item.title}</ArticleItem>)}
+            {!list ? <div style={{ margin: 10, textAlign: 'center' }}>Loading...</div> : list.map((item: any) => <ArticleItem key={item.id} {...item}>{item.title}</ArticleItem>)}
             <S.LoadBtn onClick={() => {
                 let nowPage = page + 1
                 GET_ARTICLES({ page: nowPage }).then((rs: any) => {

@@ -1,36 +1,36 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import s from 'styled-components'
-import {GET_ARTICLE_INFO} from '../api'
+import { GET_ARTICLE_INFO } from '../api'
 import ArticleItem from '../widget/ArticleItem'
 import CommentBox from '../widget/CommentBox'
 
 const S: any = {
-    BodyLeft: s.div`
+  BodyLeft: s.div`
       width: 700px;
       background: #fff;
       overflow: hidden;
     `,
-    BodyRight: s.div`
+  BodyRight: s.div`
       position: relative;
       padding-left: 10px;
       flex: 1;
       padding-left: 20px;
     `,
-    StickyBox: s.div`
+  StickyBox: s.div`
       width: 280px;
       position: sticky; 
       top: 20px;
     `,
-    Content: s.div`
+  Content: s.div`
       background: #fff;
       width: 100%;
       font-size: 13px;
   `,
-    ContentBox: s.div`
+  ContentBox: s.div`
       padding: 20px;
       padding-top: 0px;
   `,
-    TextArea: s.textarea`
+  TextArea: s.textarea`
       border: none;
       outline: none;
       width: 100%;
@@ -39,17 +39,17 @@ const S: any = {
       height: 100px;
       resize: none;
   `,
-    FucBox: s.div`
+  FucBox: s.div`
       display: flex;
       height: 30px;
       background: #ddd;
       align-items: center;
       font-size: 13px;
   `,
-    FucBoxLeft: s.div`
+  FucBoxLeft: s.div`
       flex: 1;
   `,
-    FucBoxRight: s.div`
+  FucBoxRight: s.div`
       width: 80px;
       height: 100%;
       line-height: 30px;
@@ -61,7 +61,7 @@ const S: any = {
         background: #bbb;
       }
   `,
-    Icon: s.i`
+  Icon: s.i`
       color: #888;
       margin-left: 8px;
       font-size: 14px;
@@ -74,37 +74,42 @@ const S: any = {
 }
 
 const T: React.FC = (props: any) => {
-    const [info, setInfo] = useState<any>({})
+  const [info, setInfo] = useState<any>('')
 
-    useEffect(() => {
-        const {match} = props
-        const {params} = match
-        const {id} = params
-        GET_ARTICLE_INFO({id}).then(rs => {
-            setInfo(rs)
-        })
-    }, [props])
+  useEffect(() => {
+    const { match } = props
+    const { params } = match
+    const { id } = params
+    GET_ARTICLE_INFO({ id }).then(rs => {
+      setInfo(rs)
+    })
+  }, [props])
 
-    return (
-        <>
-            {
-                Object.keys(info).length > 0 ? <>
-                    <S.BodyLeft>
-                        <S.Content>
-                            <ArticleItem {...info} simple={true}/>
-                            <S.ContentBox dangerouslySetInnerHTML={{__html: info.content}}/>
-                        </S.Content>
-                    </S.BodyLeft>
-                    <S.BodyRight>
-                        <S.StickyBox>
-                            <CommentBox {...info} />
-                        </S.StickyBox>
-                    </S.BodyRight>
-                </> : <div style={{fontSize: 20, textAlign: 'center', width: '100%', padding: 50}}>- There is no article
-                    for this id -</div>
-            }
-        </>
-    )
+  return (
+    <>
+      {
+        !info ? <div style={{ fontSize: 20, textAlign: 'center', width: '100%', padding: 50 }}>Loading...</div> : (
+          Object.keys(info).length > 0 ?
+            <>
+              <S.BodyLeft>
+                <S.Content>
+                  <ArticleItem {...info} simple={true} />
+                  <S.ContentBox dangerouslySetInnerHTML={{ __html: info.content }} />
+                </S.Content>
+              </S.BodyLeft>
+              <S.BodyRight>
+                <S.StickyBox>
+                  <CommentBox {...info} />
+                </S.StickyBox>
+              </S.BodyRight>
+            </> :
+            <div style={{ fontSize: 20, textAlign: 'center', width: '100%', padding: 50 }}>
+              - This id is not available -
+            </div>
+        )
+      }
+    </>
+  )
 }
 
 export default T

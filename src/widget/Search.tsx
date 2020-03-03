@@ -1,13 +1,13 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import s from 'styled-components'
 
-const Search = s.div`
+const S = {
+    Search: s.div`
     position: relative;
     width: 200px;
     height: 26px;
-`
-
-const Input = s.input`
+`,
+    Input: s.input`
     background: #555;
     border: none;
     outline: none;
@@ -15,15 +15,40 @@ const Input = s.input`
     color: #ccc;
     border-radius: 26px;
     width: 100%;
-    padding-left: 30px;
+    padding-left: 15px;
+    padding-right: 35px;
+`,
+    Icon: s.i`
+    position: absolute;
+    color: #ccc;
+    right: 10px;
+    top: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    :hover{
+        color:#fff;
+    }
 `
+}
 
-const T: React.FC = () => {
+const T: React.FC = (props) => {
+
+    const [keyword, setKeyword] = useState<any>('')
+
+
     return (
-        <Search>
-            <i className='iconfont icon-search1' style={{ position: 'absolute', color: '#ccc', left: 6, top: 6 }} />
-            <Input placeholder={'Concentration'} />
-        </Search>
+        <S.Search>
+            <S.Icon className='iconfont icon-search1'
+                onClick={() => {
+                    window.location.href = `/#/search_result/${keyword}`
+                }}
+            />
+            <S.Input
+                onChange={(e: any) => {
+                    setKeyword(e.target.value)
+                }}
+            />
+        </S.Search>
     )
 }
 

@@ -5,6 +5,8 @@ import Home from './page/Home'
 import NotFound from './page/NotFound'
 import ArticleInfo from './page/ArticleInfo'
 import Message from './page/Message'
+import SearchResult from './page/SearchResult'
+
 import {
     HashRouter as Router,
     Route,
@@ -37,21 +39,22 @@ const S: any = {
 const T: React.FC = () => {
     return (
         <S.Container>
-            <Header></Header>
+            <Header />
             <S.Body>
                 <S.BodyContent>
                     <Router>
                         <Switch>
-                            <Route exact path="/" component={() => <Home/>}/>
-                            <Route path="/article/:id" component={ArticleInfo}/>
-                            <Route path="/message" component={Message}/>
-                            <Route component={NotFound}/>
+                            <Route exact path="/" component={() => <Home />} />
+                            <Route path="/article/:id" component={ArticleInfo} />
+                            <Route path="/message" component={Message} />
+                            <Route path="/search_result/:keyword" component={SearchResult} />
+                            <Route component={NotFound} />
                         </Switch>
                     </Router>
                 </S.BodyContent>
-                <div style={{textAlign: 'center', fontSize: 12, padding: 10}}>
+                <div style={{ textAlign: 'center', fontSize: 12, padding: 10 }}>
                     -- Powered by Flower ©2020 --
-                    <br/>
+                    <br />
                     <a href="http://www.miitbeian.gov.cn/">苏ICP备19039887号</a>
                 </div>
             </S.Body>

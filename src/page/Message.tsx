@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import s from 'styled-components'
 import Dot from "../widget/Dot";
-import {GET_NOTICES} from '../api'
-import {useHistory} from "react-router"
-import {SET_NOTICE_READ} from '../api'
+import { GET_NOTICES } from '../api'
+import { useHistory } from "react-router"
+import { SET_NOTICE_READ } from '../api'
 
 const S: any = {
     Content: s.div`
@@ -79,17 +79,17 @@ const T: React.FC = () => {
             {
                 list.map((item: any, index: any) => {
                     return <S.List key={index}>
-                        <S.ListIcon src={item.avatar_url}/>
+                        <S.ListIcon src={item.avatar_url} />
                         <S.ListBox>
                             <S.ListBoxTop>
                                 {item.name}
-                                <Dot/>
+                                <Dot />
                                 {item.create_time}
                             </S.ListBoxTop>
                             <S.ListBoxBottom>
                                 <S.PreyText>在</S.PreyText>
                                 <S.Link onClick={() => {
-                                    SET_NOTICE_READ({id: item.id}).then((rs: any) => {
+                                    SET_NOTICE_READ({ id: item.id }).then((rs: any) => {
                                         history.push(`/article/${item.aid}`)
                                     })
                                 }}>{item.title || 'NOTHING'}</S.Link>
