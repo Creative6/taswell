@@ -82,6 +82,8 @@ const T: React.FC = (props: any) => {
     const { id } = params
     GET_ARTICLE_INFO({ id }).then(rs => {
       setInfo(rs)
+    }).catch(() => {
+      setInfo({})
     })
   }, [props])
 
