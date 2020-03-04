@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import s from 'styled-components'
-import {SET_COMMENT_SAVE, GET_COMMENTS} from '../api'
+import { SET_COMMENT_SAVE, GET_COMMENTS } from '../api'
 import Dot from './Dot'
+import jwt from 'jwt-decode'
+import Cookies from 'js-cookie'
 
 const S: any = {
     SB1: s.div`
@@ -87,15 +89,32 @@ const S: any = {
     `,
     CommentTips: s.div`
     background: #fff;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
     padding: 5px 10px;
     border-bottom: 1px dashed #eee;
-    color:#666;
+    color:#aaa;
+    text-align: center;
     &>i{
         margin-right:5px;
         font-size:13px;
     }
+    `,
+    LoginBtn: s.div`
+        font-size: 13px;
+        padding: 10px;
+        cursor: pointer;
+        transition: 0.2s;
+        background: #fff;
+        text-decoration: underline;
+        color: #5ab5b1;
+        :hover{
+            color: orange;
+        }
+        &>i{
+            font-size: 13px;
+            margin-right: 10px;
+        }
     `
 }
 
@@ -104,17 +123,27 @@ const T: React.FC = (props: any) => {
     const [targetUid, setTargetUid] = useState('')
     const [content, setContent] = useState('')
     const [list, setList] = useState<any>([])
+    const [userInfo, setUserInfo] = useState<any>({})
 
     useEffect(() => {
         // console.log({props})
-        const {id, uid} = props
+        const { id, uid } = props
         setAid(id)
         setTargetUid(uid)
         getComments(id)
+
+        try {
+            // @ts-ignore
+            const data = jwt(Cookies.get('twa'))
+            // console.log(data)
+            setUserInfo(data)
+        } catch (e) {
+
+        }
     }, [props])
 
     const getComments = (id: any) => {
-        GET_COMMENTS({id}).then(rs => {
+        GET_COMMENTS({ id }).then(rs => {
             setList(rs)
             setContent('')
         })
@@ -122,33 +151,47 @@ const T: React.FC = (props: any) => {
 
     return (
         <>
-            <S.SB1>
-                <S.TextArea
-                    placeholder={'Leave an interesting comment!'}
-                    onChange={(e: any) => {
-                        setContent(e.target.value)
+            {
+                userInfo.icon ? <S.SB1>
+                    <S.TextArea
+                        placeholder={'Leave an interesting comment!'}
+                        onChange={(e: any) => {
+                            setContent(e.target.value)
+                        }}
+                        value={content}
+                    />
+                    <S.FucBox>
+                        <S.FucBoxLeft>
+                            <S.Icon className={'iconfont icon-biaoqing'} />
+                            <S.Icon className={'iconfont icon-code1'} />
+                        </S.FucBoxLeft>
+                        <S.FucBoxRight onClick={() => {
+                            SET_COMMENT_SAVE({
+                                aid,
+                                targetUid,
+                                content: content.substring(0, 200),
+                            }).then(rs => {
+                                getComments(props.id)
+                            })
+                        }}>PUBLISH</S.FucBoxRight>
+                    </S.FucBox>
+                </S.SB1> : <S.LoginBtn
+                    onClick={() => {
+                        const link = window.location.hash.replace('#','$-$-$-$-$')
+                        const redirect_url = encodeURI("http://api.taswell.cn/qqlogin?link=" + link);
+                        const href_url =
+                            "https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101503025&redirect_uri=" +
+                            redirect_url + "&state=0";
+                        window.location.href = href_url
                     }}
-                    value={content}
-                />
-                <S.FucBox>
-                    <S.FucBoxLeft>
-                        <S.Icon className={'iconfont icon-biaoqing'}/>
-                        <S.Icon className={'iconfont icon-code1'}/>
-                    </S.FucBoxLeft>
-                    <S.FucBoxRight onClick={() => {
-                        SET_COMMENT_SAVE({
-                            aid,
-                            targetUid,
-                            content: content.substring(0, 200),
-                        }).then(rs => {
-                            getComments(props.id)
-                        })
-                    }}>PUBLISH</S.FucBoxRight>
-                </S.FucBox>
-            </S.SB1>
+                >
+                        <i className={'iconfont icon-QQ'}></i>
+                        Comments after login</S.LoginBtn>
+            }
             <S.CommentTips>
-                <i className={'iconfont icon-comment'}></i>
-                {list.length} comments</S.CommentTips>
+                {/* <i className={'iconfont icon-comment'} /> */}
+                - {list.length} comments -
+                </S.CommentTips>
             {list.length > 0 && <S.ListBody>
                 {
                     list.map((item: any, index: any) => {
@@ -157,14 +200,14 @@ const T: React.FC = (props: any) => {
                                 <S.ListIcon src={item.avatar_url} onError={(e: any) => {
                                     e.target.onerror = null
                                     e.target.src = 'http://thirdqq.qlogo.cn/g?b=oidb&k=FkqZfqXSogrKiagwYFJVZ3g&s=100'
-                                }}/>
+                                }} />
                                 <S.ListBox>
                                     <S.ListBoxTop>
                                         {item.name}
-                                        <Dot/>
+                                        <Dot />
                                         {item.create_time}
                                     </S.ListBoxTop>
-                                    <S.ListBoxBottom dangerouslySetInnerHTML={{__html: item.content}}/>
+                                    <S.ListBoxBottom dangerouslySetInnerHTML={{ __html: item.content }} />
                                 </S.ListBox>
                             </S.List>
                         )
