@@ -40,7 +40,7 @@ const T: React.FC = (props) => {
         <S.Search>
             <S.Icon className='iconfont icon-search1'
                 onClick={() => {
-                    window.location.href = `/#/search_result/${keyword}`
+                    window.location.href = `/#/searchresult/${keyword}`
                 }}
             />
             <S.Input

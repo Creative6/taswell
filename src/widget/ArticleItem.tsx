@@ -49,6 +49,21 @@ const S = {
     CommentNum: s.span`
         font-weight: bold;
         margin-right: 3px;
+    `,
+    Tag: s.div`
+        background: rgb(0, 0, 0);
+        color: rgb(204, 204, 204);
+        float: left;
+        font-size: 13px;
+        height: 20px;
+        line-height: 20px;
+        padding: 0px 10px;
+        margin-right: 5px;
+        transition: all 0.2s;
+        :hover{
+            cursor: pointer;
+            color: rgb(0, 255, 67);
+        }
     `
 }
 
@@ -71,63 +86,63 @@ const T: React.FC = (props: any) => {
             <S.Imgbox><S.Img src={avatar_url} onError={(e: any) => {
                 e.target.onerror = null
                 e.target.src = 'http://thirdqq.qlogo.cn/g?b=oidb&k=FkqZfqXSogrKiagwYFJVZ3g&s=100'
-            }}/></S.Imgbox>
+            }} /></S.Imgbox>
             <S.Box>
                 <S.Title onClick={() => {
                     window.open(`#/article/${id}`)
                 }}>{title}</S.Title>
                 <S.Information>
-                    <div>{name}<Dot/>{create_time}</div>
+                    <div>{name}<Dot />{create_time}</div>
                     {comment_num > 0 &&
-                    <div><S.CommentNum>{comment_num}</S.CommentNum>comment{comment_num > 1 && 's'}</div>}
+                        <div><S.CommentNum>{comment_num}</S.CommentNum>comment{comment_num > 1 && 's'}</div>}
                 </S.Information>
-                {!simple && <S.PreviewContent dangerouslySetInnerHTML={{__html: preview_content}}/>}
+                {!simple && <S.PreviewContent dangerouslySetInnerHTML={{ __html: preview_content }} />}
                 {
                     !simple && preview_img &&
-                    <div style={{marginTop: 5, overflow: 'hidden'}}>
+                    <div style={{ marginTop: 5, overflow: 'hidden' }}>
                         {preview_img.length > 0 &&
-                        preview_img.slice(0, 9).map((item: any, index: any) =>
-                            <div key={index} style={{
-                                width: 200,
-                                height: 200,
-                                background: '#000',
-                                float: 'left',
-                                marginRight: 5,
-                                marginBottom: 5,
-                                overflow: 'hidden',
-                                position: 'relative',
-                            }}>
-                                <img src={item} onError={(e: any) => {
-                                    e.target.onerror = null
-                                    e.target.src = 'http://thirdqq.qlogo.cn/g?b=oidb&k=FkqZfqXSogrKiagwYFJVZ3g&s=100'
-                                }} alt="" style={{
-                                    position: 'absolute',
-                                    left: '50%',
-                                    top: '50%',
-                                    transform: 'translate(-50%,-50%)',
-                                    width: '100%'
-                                }}/>
-                            </div>
-                        )
+                            preview_img.slice(0, 9).map((item: any, index: any) =>
+                                <div key={index} style={{
+                                    width: 200,
+                                    height: 200,
+                                    background: '#000',
+                                    float: 'left',
+                                    marginRight: 5,
+                                    marginBottom: 5,
+                                    overflow: 'hidden',
+                                    position: 'relative',
+                                }}>
+                                    <img src={item} onError={(e: any) => {
+                                        e.target.onerror = null
+                                        e.target.src = 'http://thirdqq.qlogo.cn/g?b=oidb&k=FkqZfqXSogrKiagwYFJVZ3g&s=100'
+                                    }} alt="" style={{
+                                        position: 'absolute',
+                                        left: '50%',
+                                        top: '50%',
+                                        transform: 'translate(-50%,-50%)',
+                                        width: '100%'
+                                    }} />
+                                </div>
+                            )
                         }
                     </div>
                 }
-                <div style={{overflow: 'hidden'}}>
+                <div style={{ overflow: 'hidden' }}>
                     {
-                        tag && tag.split('|').map((item: any, index: any) => <div key={index} style={{
-                            background: '#000',
-                            color: '#ccc',
-                            float: 'left',
-                            fontSize: 13,
-                            height: 20,
-                            lineHeight: '20px',
-                            padding: '0px 10px',
-                            marginRight: 5
-                        }}>{item}</div>)
+                        tag && tag.split('|').map((item: any, index: any) => <S.Tag
+                            key={index}
+                            onClick={() => {
+                                if (window.location.href.indexOf('searchresult') >= 0) {
+                                    window.location.replace(`#/searchresult/${item}`)
+                                } else {
+                                    window.open(`#/searchresult/${item}`)
+                                }
+                            }}
+                        >{item}</S.Tag>)
                     }
                 </div>
             </S.Box>
-        </S.Content>
+        </S.Content >
     )
 }
 

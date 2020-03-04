@@ -34,8 +34,8 @@ axios.interceptors.response.use(
         const {status} = response
         if (status === 401) {
             Cookies.remove('twa', {path: '/', domain: '.taswell.cn'})
-            window.location.replace('/')
-            window.location.reload()
+            window.location.replace('#/nopermission')
+            // window.location.reload()
         }
         return Promise.reject({error});
     }
