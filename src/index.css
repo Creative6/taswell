@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Trebuchet MS, Tahoma, Verdana, Arial, PMingLiu, MingLiu, 微软雅黑,
-    "Microsoft YaHei", sans-serif;
+        "Microsoft YaHei", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -17,10 +17,17 @@ pre {
     overflow: auto;
 }
 
+pre code {
+    color: #11dbe4;
+    background: #000;
+}
+
 code {
     font-family: consolas;
     font-size: 13px;
-    color: #fff;
+    background: #f1f1f1;
+    padding: 1px 3px;
+    color: #f34908;
 }
 
 img {
@@ -31,7 +38,6 @@ video {
     max-width: 100%;
 }
 
-.bf-content{
+.bf-content {
     height: calc(100vh - 320px) !important;
 }
-
