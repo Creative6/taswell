@@ -199,7 +199,7 @@ const T: React.FC = (props: any) => {
                             <S.List key={index}>
                                 <S.ListIcon src={item.avatar_url} onError={(e: any) => {
                                     e.target.onerror = null
-                                    e.target.src = 'http://thirdqq.qlogo.cn/g?b=oidb&k=FkqZfqXSogrKiagwYFJVZ3g&s=100'
+                                    e.target.src = 'http://rs.creative6.cn/icon/badimg.png'
                                 }} />
                                 <S.ListBox>
                                     <S.ListBoxTop>

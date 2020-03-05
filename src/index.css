@@ -40,4 +40,9 @@ video {
 
 .bf-content {
     height: calc(100vh - 320px) !important;
+    font-size: 13px;
+}
+
+ol,ul {
+    padding: 0px 16px !important;
 }

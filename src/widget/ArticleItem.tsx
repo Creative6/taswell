@@ -45,6 +45,7 @@ const S = {
         font-size: 12px;
         color: rgb(119, 119, 119);
         line-height: 1.5;
+        word-break: break-all;
     `,
     CommentNum: s.span`
         font-weight: bold;
@@ -85,7 +86,7 @@ const T: React.FC = (props: any) => {
         <S.Content>
             <S.Imgbox><S.Img src={avatar_url} onError={(e: any) => {
                 e.target.onerror = null
-                e.target.src = 'http://thirdqq.qlogo.cn/g?b=oidb&k=FkqZfqXSogrKiagwYFJVZ3g&s=100'
+                e.target.src = 'http://rs.creative6.cn/icon/badimg.png'
             }} /></S.Imgbox>
             <S.Box>
                 <S.Title onClick={() => {
@@ -114,7 +115,7 @@ const T: React.FC = (props: any) => {
                                 }}>
                                     <img src={item} onError={(e: any) => {
                                         e.target.onerror = null
-                                        e.target.src = 'http://thirdqq.qlogo.cn/g?b=oidb&k=FkqZfqXSogrKiagwYFJVZ3g&s=100'
+                                        e.target.src = 'http://rs.creative6.cn/icon/badimg.png'
                                     }} alt="" style={{
                                         position: 'absolute',
                                         left: '50%',

@@ -3,6 +3,7 @@ import s from 'styled-components'
 import { GET_ARTICLE_INFO } from '../api'
 import ArticleItem from '../widget/ArticleItem'
 import CommentBox from '../widget/CommentBox'
+import 'braft-editor/dist/output.css'
 
 const S: any = {
   BodyLeft: s.div`
@@ -96,7 +97,7 @@ const T: React.FC = (props: any) => {
               <S.BodyLeft>
                 <S.Content>
                   <ArticleItem {...info} simple={true} />
-                  <S.ContentBox dangerouslySetInnerHTML={{ __html: info.content }} />
+                  <S.ContentBox className="braft-output-content" dangerouslySetInnerHTML={{ __html: info.content }} />
                 </S.Content>
               </S.BodyLeft>
               <S.BodyRight>
