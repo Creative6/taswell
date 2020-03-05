@@ -7,9 +7,9 @@ const S = {
         overflow: hidden;
         display: flex;
         flex-direction: row;
-        margin-bottom: 10px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid rgb(221, 221, 221);
+        margin-bottom: 13px;
+        padding-bottom: 13px;
+        border-bottom: 2px dashed rgb(221, 221, 221);
         margin: 15px;
     `,
     Imgbox: s.div`
