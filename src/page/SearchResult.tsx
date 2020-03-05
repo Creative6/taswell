@@ -27,11 +27,13 @@ const S: any = {
 const T: React.FC = (props: any) => {
 
     const [list, setList] = useState<any>('')
+    const [keyword, setKeyword] = useState<any>('')
 
     useEffect(() => {
         const { match } = props
         const { params } = match
         const { keyword } = params
+        setKeyword(keyword)
         GET_SEARCH_RESULT({ keyword }).then(rs => {
             setList(rs)
         })
@@ -39,7 +41,7 @@ const T: React.FC = (props: any) => {
 
     return (
         <S.Content>
-            {!list ? <S.Empty>LOADING...</S.Empty> : (list.length <= 0 ? <S.Empty>- NO RESULT -</S.Empty> : <S.Empty><S.Num>- {list.length}</S.Num> RESULT{list.length > 1 && 'S'} FOUND -</S.Empty>)}
+            {!list ? <S.Empty>LOADING...</S.Empty> : (list.length <= 0 ? <S.Empty>- NO RESULT -</S.Empty> : <S.Empty><S.Num>- {list.length}</S.Num> RESULT{list.length > 1 && 'S'} FOUND FOR "{keyword}" -</S.Empty>)}
             {
                 list && list.map((item: any, index: any) => {
                     return <ArticleItem key={index} {...item} />

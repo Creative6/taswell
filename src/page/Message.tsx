@@ -100,7 +100,7 @@ const T: React.FC = () => {
                     </S.List>
                 })
             }
-            {list.length <= 0 && <S.Empty>NO MESSAGE</S.Empty>}
+            {list.length <= 0 && <S.Empty>- NO MESSAGE -</S.Empty>}
         </S.Content>
     )
 }
