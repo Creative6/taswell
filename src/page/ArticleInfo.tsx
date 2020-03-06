@@ -3,6 +3,8 @@ import s from 'styled-components'
 import { GET_ARTICLE_INFO } from '../api'
 import ArticleItem from '../widget/ArticleItem'
 import CommentBox from '../widget/CommentBox'
+import MoreForUser from '../widget/MoreForUser'
+import MoreLikeThis from '../widget/MoreLikeThis'
 import 'braft-editor/dist/output.css'
 
 const S: any = {
@@ -98,11 +100,13 @@ const T: React.FC = (props: any) => {
                 <S.Content>
                   <ArticleItem {...info} simple={true} />
                   <S.ContentBox className="braft-output-content" dangerouslySetInnerHTML={{ __html: info.content }} />
+                  <div style={{ padding: '0px 10px' }}><CommentBox {...info} /></div>
                 </S.Content>
               </S.BodyLeft>
               <S.BodyRight>
                 <S.StickyBox>
-                  <CommentBox {...info} />
+                  <div style={{ background: '#fff' }}>{info.uid && <MoreForUser uid={info.uid} id={info.id} />}</div>
+                  <div style={{ background: '#fff', marginTop: 10 }}>{info.uid && <MoreLikeThis title={info.title} id={info.id} tag={info.tag} />}</div>
                 </S.StickyBox>
               </S.BodyRight>
             </> :

@@ -135,6 +135,7 @@ const T: React.FC = (props: any) => {
                 />
                 <S.EditorBox>
                     <BraftEditor
+                        className={'bigeditor'}
                         media={{
                             uploadFn: myUploadFn,
                             // validateFn: myValidateFn

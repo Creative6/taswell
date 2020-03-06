@@ -4,6 +4,8 @@ import { SET_COMMENT_SAVE, GET_COMMENTS } from '../api'
 import Dot from './Dot'
 import jwt from 'jwt-decode'
 import Cookies from 'js-cookie'
+// @ts-ignore
+import E from 'wangeditor'
 
 const S: any = {
     SB1: s.div`
@@ -140,6 +142,19 @@ const T: React.FC = (props: any) => {
         } catch (e) {
 
         }
+
+        setTimeout(() => {
+            var editor2 = new E('#editor')
+            editor2.customConfig.menus = [
+                'bold',
+                'italic',
+                'underline',
+                'strikeThrough',
+                'emoticon',
+                'code'
+            ]
+            editor2.create()
+        }, 100);
     }, [props])
 
     const getComments = (id: any) => {
@@ -153,13 +168,15 @@ const T: React.FC = (props: any) => {
         <>
             {
                 userInfo.icon ? <S.SB1>
-                    <S.TextArea
+                    {/* <S.TextArea
                         placeholder={'Leave an interesting comment!'}
                         onChange={(e: any) => {
                             setContent(e.target.value)
                         }}
                         value={content}
-                    />
+                    /> */}
+                    <div id="editor">
+                    </div>
                     <S.FucBox>
                         <S.FucBoxLeft>
                             <S.Icon className={'iconfont icon-biaoqing'} />
@@ -177,7 +194,7 @@ const T: React.FC = (props: any) => {
                     </S.FucBox>
                 </S.SB1> : <S.LoginBtn
                     onClick={() => {
-                        const link = window.location.hash.replace('#','$-$-$-$-$')
+                        const link = window.location.hash.replace('#', '$-$-$-$-$')
                         const redirect_url = encodeURI("http://api.taswell.cn/qqlogin?link=" + link);
                         const href_url =
                             "https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101503025&redirect_uri=" +

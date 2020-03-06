@@ -5,6 +5,7 @@ import PersonActiveRankings from '../widget/PersonActiveRankings'
 import NewsPopularity from '../widget/NewsPopularity'
 import Publish from '../widget/Publish'
 import My from '../widget/My'
+import Tags from '../widget/Tags'
 
 const S: any = {
     BodyLeft: s.div`
@@ -64,6 +65,9 @@ const T: React.FC = () => {
                     </S.StickyBoxChild>
                     <S.StickyBoxChild>
                         <PersonActiveRankings/>
+                    </S.StickyBoxChild>
+                    <S.StickyBoxChild>
+                        <Tags/>
                     </S.StickyBoxChild>
                 </S.StickyBox>
             </S.BodyRight>

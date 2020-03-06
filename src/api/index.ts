@@ -12,4 +12,8 @@ export const UPLOAD = (para?: any) => fileUpload("/upload", para);
 export const SET_ARTICLE_SAVE = (para?: any) => post("/save", para);
 export const SET_NOTICE_READ = (para?: any) => get("/notice_read", para);
 export const GET_SEARCH_RESULT = (para?: any) => get("/search", para);
+export const GET_ARTICLE_BY_UID = (para?: any) => get("/user_articles", para);
+export const GET_ARTICLE_BY_KEYWORD = (para?: any) => get("/keyword_articles", para);
+export const GET_TAGS = (para?: any) => get("/tags", para);
+
 
