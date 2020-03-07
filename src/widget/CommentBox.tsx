@@ -59,8 +59,6 @@ const S: any = {
     background: #fff;
     padding: 10px;
     padding-bottom: 1px;
-    max-height: calc(100vh - 250px);
-    overflow: auto;
     `,
     List: s.div`
     display: flex;
@@ -120,10 +118,12 @@ const S: any = {
     `
 }
 
+// @ts-ignore
+var editor: any = undefined
+
 const T: React.FC = (props: any) => {
     const [aid, setAid] = useState('')
     const [targetUid, setTargetUid] = useState('')
-    const [content, setContent] = useState('')
     const [list, setList] = useState<any>([])
     const [userInfo, setUserInfo] = useState<any>({})
 
@@ -144,8 +144,8 @@ const T: React.FC = (props: any) => {
         }
 
         setTimeout(() => {
-            var editor2 = new E('#editor')
-            editor2.customConfig.menus = [
+            editor = new E('#editor')
+            editor.customConfig.menus = [
                 'bold',
                 'italic',
                 'underline',
@@ -153,14 +153,43 @@ const T: React.FC = (props: any) => {
                 'emoticon',
                 'code'
             ]
-            editor2.create()
+            const paopao = []
+            for (let index = 0; index < 50; index++) {
+                paopao.push(
+                    {
+                        alt: `paopao${index}`,
+                        src: `http://rs.creative6.cn/paopao/qwe%20(${index + 1}).png`
+                    }
+                )
+            }
+            const tusiji = []
+            for (let index = 0; index < 29; index++) {
+                tusiji.push(
+                    {
+                        alt: `tusiji${index}`,
+                        src: `http://rs.creative6.cn/tusiji/${index + 1}.gif`
+                    }
+                )
+            }
+            editor.customConfig.emotions = [
+                {
+                    title: '泡泡',
+                    type: 'image',
+                    content: paopao
+                },
+                {
+                    title: '兔斯基',
+                    type: 'image',
+                    content: tusiji
+                }
+            ]
+            editor.create()
         }, 100);
     }, [props])
 
     const getComments = (id: any) => {
         GET_COMMENTS({ id }).then(rs => {
             setList(rs)
-            setContent('')
         })
     }
 
@@ -168,28 +197,24 @@ const T: React.FC = (props: any) => {
         <>
             {
                 userInfo.icon ? <S.SB1>
-                    {/* <S.TextArea
-                        placeholder={'Leave an interesting comment!'}
-                        onChange={(e: any) => {
-                            setContent(e.target.value)
-                        }}
-                        value={content}
-                    /> */}
                     <div id="editor">
                     </div>
                     <S.FucBox>
                         <S.FucBoxLeft>
-                            <S.Icon className={'iconfont icon-biaoqing'} />
-                            <S.Icon className={'iconfont icon-code1'} />
+                            {/* <S.Icon className={'iconfont icon-biaoqing'} />
+                            <S.Icon className={'iconfont icon-code1'} /> */}
                         </S.FucBoxLeft>
                         <S.FucBoxRight onClick={() => {
-                            SET_COMMENT_SAVE({
-                                aid,
-                                targetUid,
-                                content: content.substring(0, 200),
-                            }).then(rs => {
-                                getComments(props.id)
-                            })
+                            if (editor.txt.text() || editor.txt.html().indexOf('img') >= 0) {
+                                SET_COMMENT_SAVE({
+                                    aid,
+                                    targetUid,
+                                    content: editor.txt.html(),
+                                }).then(rs => {
+                                    editor.txt.clear()
+                                    getComments(props.id)
+                                })
+                            }
                         }}>PUBLISH</S.FucBoxRight>
                     </S.FucBox>
                 </S.SB1> : <S.LoginBtn
@@ -209,28 +234,30 @@ const T: React.FC = (props: any) => {
                 {/* <i className={'iconfont icon-comment'} /> */}
                 - {list.length} comments -
                 </S.CommentTips>
-            {list.length > 0 && <S.ListBody>
-                {
-                    list.map((item: any, index: any) => {
-                        return (
-                            <S.List key={index}>
-                                <S.ListIcon src={item.avatar_url} onError={(e: any) => {
-                                    e.target.onerror = null
-                                    e.target.src = 'http://rs.creative6.cn/icon/badimg.png'
-                                }} />
-                                <S.ListBox>
-                                    <S.ListBoxTop>
-                                        {item.name}
-                                        <Dot />
-                                        {item.create_time}
-                                    </S.ListBoxTop>
-                                    <S.ListBoxBottom dangerouslySetInnerHTML={{ __html: item.content }} />
-                                </S.ListBox>
-                            </S.List>
-                        )
-                    })
-                }
-            </S.ListBody>}
+            {
+                list.length > 0 && <S.ListBody>
+                    {
+                        list.map((item: any, index: any) => {
+                            return (
+                                <S.List key={index}>
+                                    <S.ListIcon src={item.avatar_url} onError={(e: any) => {
+                                        e.target.onerror = null
+                                        e.target.src = 'http://rs.creative6.cn/icon/badimg.png'
+                                    }} />
+                                    <S.ListBox>
+                                        <S.ListBoxTop>
+                                            {item.name}
+                                            <Dot />
+                                            {item.create_time}
+                                        </S.ListBoxTop>
+                                        <S.ListBoxBottom dangerouslySetInnerHTML={{ __html: item.content }} />
+                                    </S.ListBox>
+                                </S.List>
+                            )
+                        })
+                    }
+                </S.ListBody>
+            }
         </>
     )
 }
