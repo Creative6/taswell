@@ -95,7 +95,7 @@ const T: React.FC = () => {
                                 }}>{item.title || 'NOTHING'}</S.Link>
                                 <S.PreyText>中评论:</S.PreyText>
                             </S.ListBoxBottom>
-                            <S.ContentText>{item.content}</S.ContentText>
+                            <S.ContentText dangerouslySetInnerHTML={{ __html: item.content }} />
                         </S.ListBox>
                     </S.List>
                 })
