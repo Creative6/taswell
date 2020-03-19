@@ -17,12 +17,16 @@ const S = {
         }
     `,
     Title: s.div`
-        background: #000;
-        color: #eee;
-        height: 35px;
-        line-height: 35px;
-        text-indent: 15px;
-        font-size: 14px;    
+    background: #fff;
+    color: #000;
+    height: 35px;
+    line-height: 35px;
+    text-indent: 15px;
+    font-size: 14px;    
+    >span{
+        border-left:5px solid #000;
+        padding-left:10px;
+    }
     `,
     Tag: s.div`
         background: #3c3c3c;
@@ -43,7 +47,7 @@ const T: React.FC<any> = () => {
     const [data, setData] = useState<any>()
     useEffect(() => {
         GET_TAGS().then((rs: any) => {
-            setData(rs)
+            setData(rs.slice(-10))
         })
     }, [])
 
@@ -51,7 +55,9 @@ const T: React.FC<any> = () => {
 
     return (
         <>
-            <S.Title>Tags</S.Title>
+            <S.Title>
+                <span>Tags -</span>
+            </S.Title>
             <div style={{ background: '#fff', overflow: 'hidden', display: 'flex', flexWrap: 'wrap', padding: 10 }}>
                 {
                     data && data.map((item: any, index: any) =>

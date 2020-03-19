@@ -65,6 +65,18 @@ const S = {
             cursor: pointer;
             color: rgb(0, 255, 67);
         }
+    `,
+    NumTips: s.div`
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        background: #00000087;
+        width: 30px;
+        height: 30px;
+        color: #fff;
+        text-align: center;
+        line-height: 30px;
+        font-size: 20px;
     `
 }
 
@@ -102,7 +114,7 @@ const T: React.FC = (props: any) => {
                     !simple && preview_img &&
                     <div style={{ marginTop: 5, overflow: 'hidden' }}>
                         {preview_img.length > 0 &&
-                            preview_img.slice(0, 9).map((item: any, index: any) =>
+                            preview_img.slice(0, 3).map((item: any, index: any) =>
                                 <div key={index} style={{
                                     width: 200,
                                     height: 200,
@@ -123,6 +135,7 @@ const T: React.FC = (props: any) => {
                                         transform: 'translate(-50%,-50%)',
                                         width: '100%'
                                     }} />
+                                    {preview_img.length > 3 && index === 2 && <S.NumTips>{preview_img.length}</S.NumTips>}
                                 </div>
                             )
                         }

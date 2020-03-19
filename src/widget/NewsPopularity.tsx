@@ -18,12 +18,16 @@ const S = {
         }
     `,
     Title: s.div`
-        background: #000;
-        color: #eee;
+        background: #fff;
+        color: #000;
         height: 35px;
         line-height: 35px;
         text-indent: 15px;
         font-size: 14px;    
+        >span{
+            border-left:5px solid #000;
+            padding-left:10px;
+        }
     `,
     Num: s.span`
         font-weight: bold;
@@ -47,7 +51,9 @@ const T: React.FC = () => {
 
     return (
         <>
-            <S.Title>NewsPopularity</S.Title>
+            <S.Title>
+                <span>NewsPopularity -</span>
+            </S.Title>
             {data && data.map((item: any, index: number) => {
                 return <S.Item key={index} onClick={() => {
                     window.open(`#/article/${item.id}`)

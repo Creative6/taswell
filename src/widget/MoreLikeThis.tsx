@@ -18,12 +18,16 @@ const S = {
         }
     `,
     Title: s.div`
-        background: #000;
-        color: #eee;
-        height: 35px;
-        line-height: 35px;
-        text-indent: 15px;
-        font-size: 14px;    
+    background: #fff;
+    color: #000;
+    height: 35px;
+    line-height: 35px;
+    text-indent: 15px;
+    font-size: 14px;    
+    >span{
+        border-left:5px solid #000;
+        padding-left:10px;
+    }   
     `,
     Num: s.span`
         font-weight: bold;
@@ -47,7 +51,9 @@ const T: React.FC<any> = (props: any) => {
 
     return (
         <>
-            <S.Title>MoreLikeThis</S.Title>
+            <S.Title>
+                <span>MoreLikeThis -</span>
+            </S.Title>
             {
                 !data ?
                     <div style={{ padding: 15, fontSize: 13, color: '#aaa' }}>Loading...</div>
