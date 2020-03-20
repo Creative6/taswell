@@ -105,9 +105,11 @@ const S: any = {
         padding: 10px;
         cursor: pointer;
         transition: 0.2s;
-        background: #fff;
         text-decoration: underline;
-        color: #5ab5b1;
+        color: #888888;
+        text-align: center;
+        background: #eee;
+        text-transform: uppercase;
         :hover{
             color: orange;
         }

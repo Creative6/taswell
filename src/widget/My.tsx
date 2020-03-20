@@ -73,7 +73,7 @@ const S = {
     `,
     LoginBtn: s.div`
         font-size: 13px;
-        padding: 10px;
+        padding: 10px 15px;
         cursor: pointer;
         transition: 0.2s;
         :hover{
@@ -129,10 +129,10 @@ const T: React.FC = () => {
                 <S.BoxText>Message</S.BoxText>
                 {noticeNum ? <S.Tips/> : null}
             </S.Box>
-            <S.Box>
+            {/* <S.Box>
                 <i className={'iconfont icon-go__icon_like-'}/>
                 <S.BoxText>Like</S.BoxText>
-            </S.Box>
+            </S.Box> */}
             <S.Box
                 onClick={() => {
                     Cookies.remove('twa', {path: '/', domain: '.taswell.cn'})

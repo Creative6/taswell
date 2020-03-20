@@ -23,22 +23,26 @@ const S = {
     line-height: 35px;
     text-indent: 15px;
     font-size: 14px;    
-    >span{
-        border-left:5px solid #000;
-        padding-left:10px;
+    >i{
+        margin-right: 5px;
+        font-size: 13px;
     }
     `,
     Tag: s.div`
-        background: #3c3c3c;
-        color: #fff;
-        font-size: 12px;
+        font-size: 13px;
         margin: 3px;
-        padding: 5px 10px;
         cursor: pointer;
         transition: all 0.2s;
+        padding: 3px 8px;
+        background: #e8eeef;
+        color: #888;
         :hover{
-            background: #000 !important;
-            color: #00ff1f;
+            background: #bdbdbd;
+            color: #fff;
+        };
+        >i{
+            font-size:12px;
+            margin-right:3px;
         }
     `
 }
@@ -47,23 +51,23 @@ const T: React.FC<any> = () => {
     const [data, setData] = useState<any>()
     useEffect(() => {
         GET_TAGS().then((rs: any) => {
-            setData(rs.slice(-10))
+            setData(rs.slice(0, 10))
         })
     }, [])
 
-    const colorList: any = ['palevioletred', 'orange', 'cornflowerblue']
+    // const colorList: any = ['palevioletred', 'orange', 'cornflowerblue']
 
     return (
         <>
             <S.Title>
-                <span>Tags -</span>
+                <i className={'iconfont icon-tag'} />Tags [TOP 10] -
             </S.Title>
-            <div style={{ background: '#fff', overflow: 'hidden', display: 'flex', flexWrap: 'wrap', padding: 10 }}>
+            <div style={{ background: '#fff', overflow: 'hidden', display: 'flex', flexWrap: 'wrap', padding: 10, paddingTop: 0 }}>
                 {
                     data && data.map((item: any, index: any) =>
                         <S.Tag
                             key={index}
-                            style={{ background: colorList[index] || '#bfa7ba' }}
+                            // style={{ background: colorList[index] || '#bfa7ba' }}
                             onClick={() => {
                                 if (window.location.href.indexOf('searchresult') >= 0) {
                                     window.location.replace(`#/searchresult/${item.name}`)
@@ -71,7 +75,10 @@ const T: React.FC<any> = () => {
                                     window.open(`#/searchresult/${item.name}`)
                                 }
                             }}
-                        >{item.name}-{item.num}</S.Tag>
+                        >
+                            {/* <i className={'iconfont icon-tag'} /> */}
+                            {item.name}-{item.num}
+                        </S.Tag>
                     )
                 }
             </div>

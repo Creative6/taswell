@@ -89,8 +89,8 @@ const S = {
     List: s.div`
         position: relative;
         float: left;
-        background: #000;
-        color: #ccc;
+        background: #eaeaea;
+        color: #1b1b1b;
         font-size: 13px;
         margin: 5px;
         padding: 5px;
@@ -160,7 +160,7 @@ const T: React.FC = (props: any) => {
                         />
                         <S.AddBtn
                             onClick={() => {
-                                if (!tagText || tag.length === 10) return
+                                if (!tagText || tag.length === 10 || tag.indexOf(tagText) >= 0) return
                                 const tag_temp = JSON.parse(JSON.stringify(tag))
                                 tag_temp.push(tagText)
                                 _tag(tag_temp)
@@ -174,6 +174,7 @@ const T: React.FC = (props: any) => {
                         {
                             tag.map((item: any, index: any) => {
                                 return <S.List key={index}>
+                                    <span style={{ color: '#999', fontWeight: 'bold', marginRight: 3 }}>#</span>
                                     {item}
                                     <i
                                         className={'iconfont icon-close'}
@@ -199,7 +200,7 @@ const T: React.FC = (props: any) => {
                             // @ts-ignore
                             alert.hidePublish()
                         }}
-                    >Cancel</S.Btn>
+                    >CANCEL</S.Btn>
                     <S.Btn title={'confirm'}
                         onClick={() => {
                             let preview_img = []
@@ -225,7 +226,7 @@ const T: React.FC = (props: any) => {
                                 window.location.reload()
                             })
                         }}
-                    >Comfirm</S.Btn>
+                    >CONFIRM</S.Btn>
                 </S.BtnBox>
             </S.ContentRight>
         </S.Content>

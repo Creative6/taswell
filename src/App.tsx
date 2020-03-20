@@ -34,6 +34,26 @@ const S: any = {
     width: 1000px;
     margin: 20px auto;
     display: flex;
+  `,
+    SlickBox: s.div`
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  `,
+    SlickImg: s.img`
+    cursor:pointer;
+  `,
+    SlickBack: s.div`
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 999;
+    background: #00000085;
   `
 }
 

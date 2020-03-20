@@ -44,6 +44,7 @@ const T: React.FC = (props) => {
                 }}
             />
             <S.Input
+                placeholder={'WTF'}
                 onChange={(e: any) => {
                     setKeyword(e.target.value)
                 }}

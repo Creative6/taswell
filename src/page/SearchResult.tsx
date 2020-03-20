@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import s from 'styled-components'
 import { GET_SEARCH_RESULT } from '../api'
 import ArticleItem from '../widget/ArticleItem'
+import Loading from '../widget/Loading'
 
 const S: any = {
     Content: s.div`
@@ -41,7 +42,7 @@ const T: React.FC = (props: any) => {
 
     return (
         <S.Content>
-            {!list ? <S.Empty>LOADING...</S.Empty> : (list.length <= 0 ? <S.Empty>- NO RESULT -</S.Empty> : <S.Empty><S.Num>- {list.length}</S.Num> RESULT{list.length > 1 && 'S'} FOUND FOR "{keyword}" -</S.Empty>)}
+            {!list ? <Loading /> : (list.length <= 0 ? <S.Empty>- NO RESULT -</S.Empty> : <S.Empty><S.Num>- {list.length}</S.Num> RESULT{list.length > 1 && 'S'} FOUND FOR "{keyword}" -</S.Empty>)}
             {
                 list && list.map((item: any, index: any) => {
                     return <ArticleItem key={index} {...item} />

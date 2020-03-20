@@ -5,6 +5,7 @@ import ArticleItem from '../widget/ArticleItem'
 import CommentBox from '../widget/CommentBox'
 import MoreForUser from '../widget/MoreForUser'
 import MoreLikeThis from '../widget/MoreLikeThis'
+import Loading from '../widget/Loading'
 import 'braft-editor/dist/output.css'
 
 const S: any = {
@@ -93,7 +94,7 @@ const T: React.FC = (props: any) => {
   return (
     <>
       {
-        !info ? <div style={{ fontSize: 20, textAlign: 'center', width: '100%', padding: 50 }}>Loading...</div> : (
+        !info ? <Loading /> : (
           Object.keys(info).length > 0 ?
             <>
               <S.BodyLeft>

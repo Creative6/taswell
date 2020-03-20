@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import s from 'styled-components'
 import { GET_ARTICLE_BY_KEYWORD } from '../api'
 import NumberDot from './NumberDot'
+import Loading from '../widget/Loading'
 
 const S = {
     Item: s.div`
@@ -24,10 +25,10 @@ const S = {
     line-height: 35px;
     text-indent: 15px;
     font-size: 14px;    
-    >span{
-        border-left:5px solid #000;
-        padding-left:10px;
-    }   
+    >i{
+        margin-right: 5px;
+        font-size: 13px;
+    }
     `,
     Num: s.span`
         font-weight: bold;
@@ -52,11 +53,11 @@ const T: React.FC<any> = (props: any) => {
     return (
         <>
             <S.Title>
-                <span>MoreLikeThis -</span>
+                <i className={'iconfont icon-more2'} />MoreLikeThis -
             </S.Title>
             {
                 !data ?
-                    <div style={{ padding: 15, fontSize: 13, color: '#aaa' }}>Loading...</div>
+                    <Loading/>
                     : (
                         data.length > 0 ? data.map((item: any, index: number) => {
                             return <S.Item key={index} onClick={() => {
@@ -69,7 +70,7 @@ const T: React.FC<any> = (props: any) => {
                                 <div><S.Num>{item.count}</S.Num> comments</div>
                             </S.Item>
                         }) :
-                        <div style={{ padding: 15, fontSize: 13, color: '#aaa' }}>NOTHING</div>
+                            <div style={{ padding: 15, fontSize: 13, color: '#aaa' }}>NOTHING</div>
                     )
             }
         </>

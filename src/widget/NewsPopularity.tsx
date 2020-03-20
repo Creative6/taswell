@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react"
+import React, { useEffect, useState } from "react"
 import s from 'styled-components'
-import {GET_ARTICLE_POPULARITY} from '../api'
+import { GET_ARTICLE_POPULARITY } from '../api'
 import NumberDot from './NumberDot'
 
 const S = {
@@ -24,9 +24,9 @@ const S = {
         line-height: 35px;
         text-indent: 15px;
         font-size: 14px;    
-        >span{
-            border-left:5px solid #000;
-            padding-left:10px;
+        >i{
+            margin-right: 5px;
+            font-size: 13px;
         }
     `,
     Num: s.span`
@@ -52,14 +52,14 @@ const T: React.FC = () => {
     return (
         <>
             <S.Title>
-                <span>NewsPopularity -</span>
+                <i className={'iconfont icon-popular_fill'} />NewsPopularity -
             </S.Title>
             {data && data.map((item: any, index: number) => {
                 return <S.Item key={index} onClick={() => {
                     window.open(`#/article/${item.id}`)
                 }}>
-                    <div style={{display: 'flex'}} title={item.title}>
-                        <NumberDot num={index + 1}/>
+                    <div style={{ display: 'flex' }} title={item.title}>
+                        <NumberDot num={index + 1} />
                         <S.TitleWarp>{item.title}</S.TitleWarp>
                     </div>
                     <div><S.Num>{item.count}</S.Num> comments</div>

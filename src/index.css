@@ -59,3 +59,15 @@ p {
 .w-e-text code {
     background: #000;
 }
+
+.w-e-text {
+    background: #f7f7f7;
+}
+
+.w-e-toolbar {
+    border: none !important;
+}
+
+.w-e-text-container {
+    border: none !important;
+}

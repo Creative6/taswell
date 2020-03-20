@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import s from 'styled-components'
 import ArticleItem from './ArticleItem'
+import Loading from '../widget/Loading'
 import { GET_ARTICLES } from '../api'
 
 const S = {
@@ -29,7 +30,7 @@ const T: React.FC = () => {
 
     return (
         <>
-            {!list ? <div style={{ margin: 10, textAlign: 'center' }}>Loading...</div> : list.map((item: any) => <ArticleItem key={item.id} {...item}>{item.title}</ArticleItem>)}
+            {!list ? <Loading /> : list.map((item: any) => <ArticleItem key={item.id} {...item}>{item.title}</ArticleItem>)}
             <S.LoadBtn onClick={() => {
                 let nowPage = page + 1
                 GET_ARTICLES({ page: nowPage }).then((rs: any) => {

@@ -2,12 +2,13 @@ import * as React from 'react'
 import s from 'styled-components'
 import Dot from './Dot'
 
+
 const S = {
     Content: s.div`
         overflow: hidden;
         display: flex;
         flex-direction: row;
-        margin-bottom: 13px;
+        margin-bottom: 10px;
         padding-bottom: 13px;
         border-bottom: 2px dashed rgb(221, 221, 221);
         margin: 15px;
@@ -52,18 +53,21 @@ const S = {
         margin-right: 3px;
     `,
     Tag: s.div`
-        background: rgb(0, 0, 0);
-        color: rgb(204, 204, 204);
         float: left;
-        font-size: 13px;
+        font-size: 12px;
         height: 20px;
         line-height: 20px;
-        padding: 0px 10px;
-        margin-right: 5px;
+        margin-right: 10px;
         transition: all 0.2s;
+        font-weight:bold;
+        color:#999;
         :hover{
             cursor: pointer;
-            color: rgb(0, 255, 67);
+            text-decoration: underline;
+        };
+        >i{
+            font-size:12px;
+            margin-right:3px;
         }
     `,
     NumTips: s.div`
@@ -125,16 +129,20 @@ const T: React.FC = (props: any) => {
                                     overflow: 'hidden',
                                     position: 'relative',
                                 }}>
-                                    <img src={item} onError={(e: any) => {
-                                        e.target.onerror = null
-                                        e.target.src = 'http://rs.creative6.cn/icon/badimg.png'
-                                    }} alt="" style={{
-                                        position: 'absolute',
-                                        left: '50%',
-                                        top: '50%',
-                                        transform: 'translate(-50%,-50%)',
-                                        width: '100%'
-                                    }} />
+                                    <img
+                                        src={item}
+                                        onError={(e: any) => {
+                                            e.target.onerror = null
+                                            e.target.src = 'http://rs.creative6.cn/icon/badimg.png'
+                                        }}
+                                        alt=""
+                                        style={{
+                                            position: 'absolute',
+                                            left: '50%',
+                                            top: '50%',
+                                            transform: 'translate(-50%,-50%)',
+                                            width: '100%'
+                                        }} />
                                     {preview_img.length > 3 && index === 2 && <S.NumTips>{preview_img.length}</S.NumTips>}
                                 </div>
                             )
@@ -152,7 +160,7 @@ const T: React.FC = (props: any) => {
                                     window.open(`#/searchresult/${item}`)
                                 }
                             }}
-                        >{item}</S.Tag>)
+                        ><i className={'iconfont icon-tag'} />{item}</S.Tag>)
                     }
                 </div>
             </S.Box>
