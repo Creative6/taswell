@@ -41,14 +41,15 @@ const T: React.FC = (props: any) => {
     }, [props])
 
     return (
-        <S.Content>
-            {!list ? <Loading /> : (list.length <= 0 ? <S.Empty>- NO RESULT -</S.Empty> : <S.Empty><S.Num>- {list.length}</S.Num> RESULT{list.length > 1 && 'S'} FOUND FOR "{keyword}" -</S.Empty>)}
+        <>
             {
-                list && list.map((item: any, index: any) => {
+                !list ? <Loading /> : (list.length <= 0 ? <Loading text='- No Result -' /> : <S.Content><Loading text={`- ${list.length} RESULT${list.length > 1 && 'S'} FOUND FOR "${keyword}" -`} />{list.map((item: any, index: any) => {
                     return <ArticleItem key={index} {...item} />
-                })
+                })}
+                </S.Content>
+                )
             }
-        </S.Content>
+        </>
     )
 }
 

@@ -1,25 +1,31 @@
 import * as React from 'react'
 
-const T: React.FC = () => {
+const T: React.FC<any> = (props) => {
+    const {
+        text = 'Loading...'
+    } = props
+
     return <div
         style={{
-            fontSize: 20,
+            fontSize: 15,
             textAlign: 'center',
             width: '100%',
-            paddingBottom: 10
+            padding: 10
         }}>
-        <img
-            src={require('../loading.svg')}
-            alt=""
-            style={{
-                width: 30,
-                position: 'relative',
-                top: 8,
-                right: 8
-            }}
-        />
-        Loading...
-        </div>
+        {
+            text === 'Loading...' && <img
+                src={require('../loading.svg')}
+                alt=""
+                style={{
+                    width: 20,
+                    position: 'absolute',
+                    marginLeft: -22,
+                    marginTop: -1
+                }}
+            />
+        }
+        {text}
+    </div>
 }
 
 export default T

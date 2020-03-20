@@ -4,6 +4,7 @@ import Dot from "../widget/Dot";
 import { GET_NOTICES } from '../api'
 import { useHistory } from "react-router"
 import { SET_NOTICE_READ } from '../api'
+import Loading from '../widget/Loading'
 
 const S: any = {
     Content: s.div`
@@ -12,7 +13,6 @@ const S: any = {
     width: 800px;
     background: #fff;
     padding: 15px;
-    padding-bottom: 0px;
     margin:0 auto;
     `,
     List: s.div`
@@ -59,14 +59,16 @@ const S: any = {
     Empty: s.div`
         text-align:center;
         margin-bottom: 10px;
-        font-size: 13px;
+        font-size: 15px;
+        width: 100%;
+        padding: 10px;
     `
 }
 
 const T: React.FC = () => {
     const history = useHistory()
 
-    const [list, setList] = useState<any>([])
+    const [list, setList] = useState<any>('')
 
     useEffect(() => {
         GET_NOTICES().then(rs => {
@@ -75,9 +77,9 @@ const T: React.FC = () => {
     }, [])
 
     return (
-        <S.Content>
+        <>
             {
-                list.map((item: any, index: any) => {
+                !list ? <Loading /> : (list.length <= 0 ? <Loading text='- No Message -'/> : <S.Content>{list.map((item: any, index: any) => {
                     return <S.List key={index}>
                         <S.ListIcon src={item.avatar_url} />
                         <S.ListBox>
@@ -98,10 +100,11 @@ const T: React.FC = () => {
                             <S.ContentText dangerouslySetInnerHTML={{ __html: item.content }} />
                         </S.ListBox>
                     </S.List>
-                })
+                })}
+                </S.Content>
+                )
             }
-            {list.length <= 0 && <S.Empty>- NO MESSAGE -</S.Empty>}
-        </S.Content>
+        </>
     )
 }
 
