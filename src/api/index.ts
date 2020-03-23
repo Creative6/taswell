@@ -15,5 +15,8 @@ export const GET_SEARCH_RESULT = (para?: any) => get("/search", para);
 export const GET_ARTICLE_BY_UID = (para?: any) => get("/user_articles", para);
 export const GET_ARTICLE_BY_KEYWORD = (para?: any) => get("/keyword_articles", para);
 export const GET_TAGS = (para?: any) => get("/tags", para);
+export const GET_ARTICLES_BY_USER = (para?: any) => get("/articles_by_user", para);
+export const GET_ARTICLES_BY_MY = (para?: any) => get("/articles_by_my", para);
+
 
 

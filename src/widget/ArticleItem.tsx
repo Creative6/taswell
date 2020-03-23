@@ -95,21 +95,26 @@ const T: React.FC = (props: any) => {
         comment_num,
         id,
         simple,
-        tag = ''
+        tag = '',
+        hidePersonInfo = false
     } = props
 
     return (
         <S.Content>
-            <S.Imgbox><S.Img src={avatar_url} onError={(e: any) => {
-                e.target.onerror = null
-                e.target.src = 'http://rs.creative6.cn/icon/badimg.png'
-            }} /></S.Imgbox>
+            {
+                !hidePersonInfo && <S.Imgbox>
+                    <S.Img src={avatar_url} onError={(e: any) => {
+                        e.target.onerror = null
+                        e.target.src = 'http://rs.creative6.cn/icon/badimg.png'
+                    }} />
+                </S.Imgbox>
+            }
             <S.Box>
                 <S.Title onClick={() => {
                     window.open(`#/article/${id}`)
-                }}>{title}</S.Title>
+                }}>{title || 'UNKONW'}</S.Title>
                 <S.Information>
-                    <div>{name}<Dot />{create_time}</div>
+                    {!hidePersonInfo ? <div>{name}<Dot />{create_time}</div> : <div>{create_time}</div>}
                     {comment_num > 0 &&
                         <div><S.CommentNum>{comment_num}</S.CommentNum>comment{comment_num > 1 && 's'}</div>}
                 </S.Information>

@@ -7,6 +7,8 @@ import ArticleInfo from './page/ArticleInfo'
 import Message from './page/Message'
 import SearchResult from './page/SearchResult'
 import NoPermission from './page/NoPermission'
+import Person from './page/Person'
+import My from './page/My'
 
 import {
     HashRouter as Router,
@@ -70,6 +72,8 @@ const T: React.FC = () => {
                             <Route path="/message" component={Message} />
                             <Route path="/searchresult/:keyword" component={SearchResult} />
                             <Route path="/nopermission" component={NoPermission} />
+                            <Route path="/person/:uid" component={Person} />
+                            <Route path="/my" component={My} />
                             <Route component={NotFound} />
                         </Switch>
                     </Router>

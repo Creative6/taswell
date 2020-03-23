@@ -91,7 +91,7 @@ const T: React.FC = () => {
                             <S.ListBoxBottom>
                                 <S.PreyText>在</S.PreyText>
                                 <S.Link onClick={() => {
-                                    SET_NOTICE_READ({ id: item.id }).then((rs: any) => {
+                                    SET_NOTICE_READ({ id: item.aid }).then((rs: any) => {
                                         history.push(`/article/${item.aid}`)
                                     })
                                 }}>{item.title || 'NOTHING'}</S.Link>

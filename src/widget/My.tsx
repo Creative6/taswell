@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react'
-import s, {keyframes} from 'styled-components'
-import {GET_NOTICE_NUM} from '../api'
-import {useHistory} from "react-router";
+import React, { useState, useEffect } from 'react'
+import s, { keyframes } from 'styled-components'
+import { GET_NOTICE_NUM } from '../api'
+import { useHistory } from "react-router";
 import jwt from 'jwt-decode'
 import Cookies from 'js-cookie'
 
@@ -110,14 +110,18 @@ const T: React.FC = () => {
 
     return <S.Content>
         {userInfo.icon ? <>
-            <S.Img src={userInfo.icon}/>
+            <S.Img src={userInfo.icon}
+                onClick={() => {
+                    window.open(`#/my`)
+                }}
+            />
             <S.Box
                 onClick={() => {
                     // @ts-ignore
                     alert.showPublish()
                 }}
             >
-                <i className={'iconfont icon-publish'}/>
+                <i className={'iconfont icon-publish'} />
                 <S.BoxText>Publish</S.BoxText>
             </S.Box>
             <S.Box
@@ -125,9 +129,9 @@ const T: React.FC = () => {
                     history.push('/message')
                 }}
             >
-                <i className={'iconfont icon-huifu'}/>
+                <i className={'iconfont icon-huifu'} />
                 <S.BoxText>Message</S.BoxText>
-                {noticeNum ? <S.Tips/> : null}
+                {noticeNum ? <S.Tips /> : null}
             </S.Box>
             {/* <S.Box>
                 <i className={'iconfont icon-go__icon_like-'}/>
@@ -135,11 +139,11 @@ const T: React.FC = () => {
             </S.Box> */}
             <S.Box
                 onClick={() => {
-                    Cookies.remove('twa', {path: '/', domain: '.taswell.cn'})
+                    Cookies.remove('twa', { path: '/', domain: '.taswell.cn' })
                     window.location.reload()
                 }}
             >
-                <i className={'iconfont icon-exit1'}/>
+                <i className={'iconfont icon-exit1'} />
                 <S.BoxText>Exit</S.BoxText>
             </S.Box>
         </> : <S.LoginBtn
@@ -151,7 +155,7 @@ const T: React.FC = () => {
                 window.location.replace(href_url)
             }}
         >
-            <i className={'iconfont icon-QQ'}></i>
+                <i className={'iconfont icon-QQ'}></i>
             LOGIN BY QQ</S.LoginBtn>
         }
 

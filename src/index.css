@@ -71,3 +71,11 @@ p {
 .w-e-text-container {
     border: none !important;
 }
+
+iframe {
+    width: 100%;
+}
+
+iframe[bilibili] {
+    height: 542px;
+}

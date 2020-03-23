@@ -111,9 +111,7 @@ const T: React.FC = (props: any) => {
                 </S.StickyBox>
               </S.BodyRight>
             </> :
-            <div style={{ fontSize: 20, textAlign: 'center', width: '100%', padding: 50 }}>
-              - This id is not available -
-            </div>
+            <Loading text={'- This article does not exist -'}/>
         )
       }
     </>

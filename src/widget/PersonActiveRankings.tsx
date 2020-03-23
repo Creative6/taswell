@@ -49,7 +49,11 @@ const T: React.FC = () => {
                 <i className={'iconfont icon-rankfill'} />PersonActiveRankings -
             </S.Title>
             {data && data.map((item: any, index: number) => {
-                return <S.Item key={index}>
+                return <S.Item key={index}
+                    onClick={() => {
+                        window.open(`#/person/${item.uid}`)
+                    }}
+                >
                     <div><NumberDot num={index + 1} />{item.name}</div>
                     <div><S.Num>{item.count}</S.Num> releases</div>
                 </S.Item>
