@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react"
 import s from 'styled-components'
 import { GET_PERSON_ACTIVE_RANKINGS } from '../api'
 import NumberDot from './NumberDot'
+import jwt from 'jwt-decode'
+import Cookies from 'js-cookie'
 
 const S = {
     Item: s.div`
@@ -37,10 +39,22 @@ const S = {
 
 const T: React.FC = () => {
     const [data, setData] = useState<any>()
+    const [uid, setUid] = useState<any>('')
+
     useEffect(() => {
         GET_PERSON_ACTIVE_RANKINGS().then((rs: any) => {
             setData(rs)
         })
+        try {
+            //@ts-ignore
+            const data = jwt(Cookies.get('twa'))
+            console.log(data)
+            if (data.uid) {
+                setUid(data.uid)
+            }
+        } catch (error) {
+
+        }
     }, [])
 
     return (
@@ -51,7 +65,11 @@ const T: React.FC = () => {
             {data && data.map((item: any, index: number) => {
                 return <S.Item key={index}
                     onClick={() => {
-                        window.open(`#/person/${item.uid}`)
+                        if(item.uid===uid){
+                            window.open(`#/my`)
+                        }else{
+                            window.open(`#/person/${item.uid}`)
+                        }
                     }}
                 >
                     <div><NumberDot num={index + 1} />{item.name}</div>
