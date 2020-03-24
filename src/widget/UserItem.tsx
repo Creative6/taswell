@@ -27,7 +27,7 @@ const S = {
         align-items: center;
         display: flex;
     `,
-    Btn:s.div`
+    Btn: s.div`
         height: 30px;
         line-height: 30px;
         background: #ccc;
@@ -48,6 +48,7 @@ const T: React.FC<any> = (props: any) => {
         following,
         followers,
         type,
+        follow_status
         // isMe
     } = props
     return <S.Box>
@@ -58,7 +59,7 @@ const T: React.FC<any> = (props: any) => {
                 <div style={{ fontSize: 12, color: '#aaa' }}>- Following:{following} -Followers:{followers}</div>
             </S.B1>
             <S.B2>
-                <S.Btn>{type === 0 ? 'UNFOLLOW' : 'FOLLOW'}</S.Btn>
+                <S.Btn>{type === 0 ? 'UNFOLLOW' : (follow_status ? 'UNFOLLOW' : 'FOLLOW')}</S.Btn>
             </S.B2>
         </S.Content>
     </S.Box>
