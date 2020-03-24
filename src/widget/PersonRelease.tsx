@@ -83,6 +83,7 @@ const S: any = {
         margin: 0 auto;
     `,
     TagBtn: s.div`
+        font-size: 14px;
         float: left;
         width: 100px;
         text-align: center;

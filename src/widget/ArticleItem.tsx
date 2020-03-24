@@ -20,6 +20,7 @@ const S = {
         width: 40px;
         border-radius: 10px;
         margin-right: 12px;
+        cursor: pointer;
     `,
     Box: s.div`
         flex: 1;
@@ -96,6 +97,7 @@ const T: React.FC = (props: any) => {
         id,
         simple,
         tag = '',
+        uid,
         hidePersonInfo = false
     } = props
 
@@ -103,10 +105,16 @@ const T: React.FC = (props: any) => {
         <S.Content>
             {
                 !hidePersonInfo && <S.Imgbox>
-                    <S.Img src={avatar_url} onError={(e: any) => {
-                        e.target.onerror = null
-                        e.target.src = 'http://rs.creative6.cn/icon/badimg.png'
-                    }} />
+                    <S.Img
+                        src={avatar_url}
+                        onError={(e: any) => {
+                            e.target.onerror = null
+                            e.target.src = 'http://rs.creative6.cn/icon/badimg.png'
+                        }}
+                        onClick={() => {
+                            window.open(`#/person/${uid}`)
+                        }}
+                    />
                 </S.Imgbox>
             }
             <S.Box>
