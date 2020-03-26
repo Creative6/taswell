@@ -7,8 +7,7 @@ import ArticleInfo from './page/ArticleInfo'
 import Message from './page/Message'
 import SearchResult from './page/SearchResult'
 import NoPermission from './page/NoPermission'
-import Person from './page/Person'
-import My from './page/My'
+import Users from './page/Users'
 
 import {
     HashRouter as Router,
@@ -72,8 +71,7 @@ const T: React.FC = () => {
                             <Route path="/message" component={Message} />
                             <Route path="/searchresult/:keyword" component={SearchResult} />
                             <Route path="/nopermission" component={NoPermission} />
-                            <Route path="/person/:uid" component={Person} />
-                            <Route path="/my" component={My} />
+                            <Route path="/users/:name" component={Users} />
                             <Route component={NotFound} />
                         </Switch>
                     </Router>
@@ -81,7 +79,7 @@ const T: React.FC = () => {
                 <div style={{ textAlign: 'center', fontSize: 12, padding: 10 }}>
                     -- Powered by Flower ©2020 --
                     <br />
-                    <a href="http://www.miitbeian.gov.cn/">苏ICP备19039887号</a>
+                    <a href="http://www.beian.miit.gov.cn/">苏ICP备19039887号</a>
                 </div>
             </S.Body>
         </S.Container>

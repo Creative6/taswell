@@ -112,7 +112,7 @@ const T: React.FC = () => {
         {userInfo.icon ? <>
             <S.Img src={userInfo.icon}
                 onClick={() => {
-                    window.open(`#/my`)
+                    window.open(`#/users/${userInfo.name}`)
                 }}
             />
             <S.Box

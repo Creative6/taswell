@@ -97,7 +97,7 @@ const T: React.FC = (props: any) => {
         id,
         simple,
         tag = '',
-        uid,
+        // uid,
         hidePersonInfo = false
     } = props
 
@@ -112,7 +112,7 @@ const T: React.FC = (props: any) => {
                             e.target.src = 'http://rs.creative6.cn/icon/badimg.png'
                         }}
                         onClick={() => {
-                            window.open(`#/person/${uid}`)
+                            window.open(`#/users/${name}`)
                         }}
                     />
                 </S.Imgbox>

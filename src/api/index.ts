@@ -17,9 +17,11 @@ export const GET_ARTICLE_BY_KEYWORD = (para?: any) => get("/keyword_articles", p
 export const GET_TAGS = (para?: any) => get("/tags", para);
 export const SET_FOLLOW = (para?: any) => get("/follow", para);
 export const GET_ARTICLES_BY_USER = (para?: any) => get("/articles_by_user", para);
-export const GET_USERINFO_BY_ID = (para?: any) => get("/userinfo_by_id", para);
+export const GET_USERINFO_BY_NAME = (para?: any) => get("/userinfo_by_name", para);
 export const GET_FOLLOWING = (para?: any) => get("/following", para);
 export const GET_FOLLOWERS = (para?: any) => get("/followers", para);
+export const GET_MY_FOLLOWS = (para?: any) => get("/my_follows", para);
+
 
 
 
