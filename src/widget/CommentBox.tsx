@@ -74,6 +74,7 @@ const S: any = {
     margin-right: 10px;
     position: relative;
     top: 2px;
+    cursor: pointer;
     `,
     ListBox: s.div`
     flex: 1 1 0%;
@@ -245,7 +246,11 @@ const T: React.FC = (props: any) => {
                                     <S.ListIcon src={item.avatar_url} onError={(e: any) => {
                                         e.target.onerror = null
                                         e.target.src = 'http://rs.creative6.cn/icon/badimg.png'
-                                    }} />
+                                    }} 
+                                    onClick={() => {
+                                        window.open(`#/users/${item.name}`)
+                                    }}
+                                    />
                                     <S.ListBox>
                                         <S.ListBoxTop>
                                             {item.name}
