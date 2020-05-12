@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import s from "styled-components";
+import React, { useEffect, useState } from "react"
+import s from "styled-components"
 import {
   GET_ARTICLES_BY_USER,
   GET_USERINFO_BY_NAME,
   GET_FOLLOWING,
   GET_FOLLOWERS,
   SET_FOLLOW,
-  GET_MY_FOLLOWS
-} from "../api";
-import ArticleItem from "../widget/ArticleItem";
-import Loading from "../widget/Loading";
-import UserItem from "../widget/UserItem";
-import jwt from "jwt-decode";
-import Cookies from "js-cookie";
+  GET_MY_FOLLOWS,
+} from "../api"
+import ArticleItem from "../widget/ArticleItem"
+import Loading from "../widget/Loading"
+import UserItem from "../widget/UserItem"
+import jwt from "jwt-decode"
+import Cookies from "js-cookie"
 
 const S: any = {
   Content: s.div`
@@ -100,94 +100,94 @@ const S: any = {
             color: #333;
             border-bottom: 2px solid #000;
         }
-    `
-};
+    `,
+}
 
-const searchArr = ["", "?following", "?followers"];
+const searchArr = ["", "?following", "?followers"]
 
 const T: React.FC<any> = (props: any) => {
-  const { match, history } = props;
-  const { location } = history;
-  const { search } = location;
-  const { params } = match;
-  const { name } = params;
+  const { match, history } = props
+  const { location } = history
+  const { search } = location
+  const { params } = match
+  const { name } = params
 
-  const [index, setIndex] = useState(searchArr.indexOf(search));
-  const [userinfo, setUserinfo] = useState<any>({});
-  const [loginData, setLoginData] = useState<any>({});
-  const [isLogin, setIsLogin] = useState(false);
-  const [list, setList] = useState<any>("");
-  const [following, setFollowing] = useState([]);
-  const [followers, setFollowers] = useState([]);
-  const [isMe, setIsMe] = useState(false);
-  const [myFollowing, setMyFollowing] = useState<any>([]);
-  const [myFollowers, setMyFollowers] = useState<any>([]);
+  const [index, setIndex] = useState(searchArr.indexOf(search))
+  const [userinfo, setUserinfo] = useState<any>({})
+  const [loginData, setLoginData] = useState<any>({})
+  const [isLogin, setIsLogin] = useState(false)
+  const [list, setList] = useState<any>("")
+  const [following, setFollowing] = useState([])
+  const [followers, setFollowers] = useState([])
+  const [isMe, setIsMe] = useState(false)
+  const [myFollowing, setMyFollowing] = useState<any>([])
+  const [myFollowers, setMyFollowers] = useState<any>([])
 
   useEffect(() => {
     try {
       //@ts-ignore
-      const res = jwt(Cookies.get("twa"));
-      console.log(res);
-      const { uid = "", name: jname = "" } = res;
+      const res = jwt(Cookies.get("twa"))
+      console.log(res)
+      const { uid = "", name: jname = "" } = res
       if (uid) {
-        setLoginData(res);
-        setIsLogin(true);
+        setLoginData(res)
+        setIsLogin(true)
         GET_MY_FOLLOWS().then((rs: any) => {
-          const { following, followers } = rs;
-          const _following: any = [];
-          const _followers: any = [];
-          following.forEach((item: any) => _following.push(item.target_uid));
-          followers.forEach((item: any) => _followers.push(item.uid));
-          setMyFollowing(_following);
-          setMyFollowers(_followers);
-        });
+          const { following, followers } = rs
+          const _following: any = []
+          const _followers: any = []
+          following.forEach((item: any) => _following.push(item.target_uid))
+          followers.forEach((item: any) => _followers.push(item.uid))
+          setMyFollowing(_following)
+          setMyFollowers(_followers)
+        })
       }
       if (jname === name) {
-        setIsMe(true);
+        setIsMe(true)
       } else {
-        setIsMe(false);
+        setIsMe(false)
       }
     } catch (error) {
-      console.log("GET LOGIN DATA FAIL");
+      console.log("GET LOGIN DATA FAIL")
     }
 
-    GET_USERINFO_BY_NAME({ name }).then(rs => {
-      setUserinfo(rs);
-    });
+    GET_USERINFO_BY_NAME({ name }).then((rs) => {
+      setUserinfo(rs)
+    })
     GET_ARTICLES_BY_USER({ name }).then((rs: any) => {
-      setList(rs);
-    });
+      setList(rs)
+    })
     GET_FOLLOWING({ name }).then((rs: any) => {
-      setFollowing(rs);
-    });
+      setFollowing(rs)
+    })
     GET_FOLLOWERS({ name }).then((rs: any) => {
-      setFollowers(rs);
-    });
-  }, [name]);
+      setFollowers(rs)
+    })
+  }, [name])
 
   const changeIndex = (i: any) => {
-    if (i === index) return;
-    setIndex(i);
-    window.location.href = `#/users/${name}${searchArr[i]}`;
-  };
+    if (i === index) return
+    setIndex(i)
+    window.location.href = `#/users/${name}${searchArr[i]}`
+  }
 
   const getMyFollows = () => {
     GET_MY_FOLLOWS().then((rs: any) => {
-      const { following, followers } = rs;
-      const _following: any = [];
-      const _followers: any = [];
-      following.forEach((item: any) => _following.push(item.target_uid));
-      followers.forEach((item: any) => _followers.push(item.uid));
-      setMyFollowing(_following);
-      setMyFollowers(_followers);
-    });
-  };
+      const { following, followers } = rs
+      const _following: any = []
+      const _followers: any = []
+      following.forEach((item: any) => _following.push(item.target_uid))
+      followers.forEach((item: any) => _followers.push(item.uid))
+      setMyFollowing(_following)
+      setMyFollowers(_followers)
+    })
+  }
 
   const setFollow = (uid: any, type: any) => {
     SET_FOLLOW({ target_uid: uid, type: type }).then(() => {
-      getMyFollows();
-    });
-  };
+      getMyFollows()
+    })
+  }
 
   return (
     <>
@@ -208,13 +208,13 @@ const T: React.FC<any> = (props: any) => {
                     type:
                       myFollowing.indexOf(userinfo.uid) >= 0
                         ? "UNFOLLOW"
-                        : "FOLLOW"
+                        : "FOLLOW",
                   }).then(() => {
-                    getMyFollows();
+                    getMyFollows()
                     GET_FOLLOWERS({ name }).then((rs: any) => {
-                      setFollowers(rs);
-                    });
-                  });
+                      setFollowers(rs)
+                    })
+                  })
                 }}
               >
                 {myFollowing.indexOf(userinfo.uid) >= 0 ? "UNFOLLOW" : "FOLLOW"}
@@ -223,15 +223,15 @@ const T: React.FC<any> = (props: any) => {
             {!isLogin && (
               <S.FucBtn
                 onClick={() => {
-                  const link = window.location.hash.replace("#", "$-$-$-$-$");
+                  const link = window.location.hash.replace("#", "$-$-$-$-$")
                   const redirect_url = encodeURI(
                     "http://api.taswell.cn/qqlogin?link=" + link
-                  );
+                  )
                   const href_url =
                     "https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101503025&redirect_uri=" +
                     redirect_url +
-                    "&state=0";
-                  window.location.href = href_url;
+                    "&state=0"
+                  window.location.href = href_url
                 }}
               >
                 FOLLOW
@@ -242,7 +242,7 @@ const T: React.FC<any> = (props: any) => {
           <S.TagBtnBox>
             <S.TagBtn
               onClick={() => {
-                changeIndex(0);
+                changeIndex(0)
               }}
               className={index === 0 && "active"}
             >
@@ -250,7 +250,7 @@ const T: React.FC<any> = (props: any) => {
             </S.TagBtn>
             <S.TagBtn
               onClick={() => {
-                changeIndex(1);
+                changeIndex(1)
               }}
               className={index === 1 && "active"}
             >
@@ -258,7 +258,7 @@ const T: React.FC<any> = (props: any) => {
             </S.TagBtn>
             <S.TagBtn
               onClick={() => {
-                changeIndex(2);
+                changeIndex(2)
               }}
               className={index === 2 && "active"}
             >
@@ -273,7 +273,7 @@ const T: React.FC<any> = (props: any) => {
             ) : (
               <div>
                 {list.map((item: any, index: any) => {
-                  return <ArticleItem key={index} {...item} hidePersonInfo />;
+                  return <ArticleItem key={index} {...item} hidePersonInfo />
                 })}
               </div>
             ))}
@@ -296,7 +296,7 @@ const T: React.FC<any> = (props: any) => {
                       isMyFollowers={myFollowers.indexOf(item.target_uid) >= 0}
                       setFollow={setFollow}
                     />
-                  );
+                  )
                 })}
               </div>
             ))}
@@ -319,7 +319,7 @@ const T: React.FC<any> = (props: any) => {
                       isMyFollowers={myFollowers.indexOf(item.uid) >= 0}
                       setFollow={setFollow}
                     />
-                  );
+                  )
                 })}
               </div>
             ))}
@@ -328,7 +328,7 @@ const T: React.FC<any> = (props: any) => {
         <Loading text="- User does not exist -" />
       )}
     </>
-  );
-};
+  )
+}
 
-export default T;
+export default T
