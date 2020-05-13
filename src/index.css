@@ -1,81 +1,87 @@
+@font-face {
+  font-family: mako;
+  src: url("./Mako-Regular-webfont.ttf");
+}
+
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Trebuchet MS, Tahoma, Verdana, Arial, PMingLiu, MingLiu, 微软雅黑,
-        "Microsoft YaHei", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  font-family: mako, "Helvetica Neue", Helvetica, Arial, "Lantinghei SC",
+    "Microsoft YaHei", "Hiragino Sans GB", "STHeiti", "WenQuanYi Micro Hei",
+    SimSun, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 pre {
-    background: #000 !important;
-    padding: 5px;
-    overflow: auto;
+  background: #000 !important;
+  padding: 5px;
+  overflow: auto;
 }
 
 pre code {
-    color: #11dbe4;
-    background: #000;
+  color: #11dbe4;
+  background: #000;
 }
 
 code {
-    font-family: consolas;
-    font-size: 13px;
-    background: #f1f1f1;
-    color: #f34908;
+  font-family: consolas;
+  font-size: 13px;
+  background: #f1f1f1;
+  color: #f34908;
 }
 
 img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 video {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 .bigeditor .bf-content {
-    height: calc(100vh - 320px) !important;
-    font-size: 13px;
+  height: calc(100vh - 320px) !important;
+  font-size: 13px;
 }
 
 ol,
 ul {
-    padding: 0px 16px !important;
+  padding: 0px 16px !important;
 }
 
 p {
-    min-height: unset !important;
-    margin: 5px !important;
+  min-height: unset !important;
+  margin: 5px !important;
 }
 
 .w-e-text-container {
-    height: 100px !important;
+  height: 100px !important;
 }
 
 .w-e-text code {
-    background: #000;
+  background: #000;
 }
 
 .w-e-text {
-    background: #f7f7f7;
+  background: #f7f7f7;
 }
 
 .w-e-toolbar {
-    border: none !important;
+  border: none !important;
 }
 
 .w-e-text-container {
-    border: none !important;
+  border: none !important;
 }
 
 iframe {
-    width: 100%;
+  width: 100%;
 }
 
 iframe[bilibili] {
-    height: 542px;
+  height: 542px;
 }

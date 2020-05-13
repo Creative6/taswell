@@ -10,7 +10,6 @@ const Dot = s.span`
     color: #fff;
     margin-right: 5px;
     font-size: 12px;
-    font-family: fantasy;
 `
 
 const colorList: any = ['#ff3939', '#19b3cc', '#da9d13']

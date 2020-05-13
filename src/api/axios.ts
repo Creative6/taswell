@@ -10,6 +10,8 @@ if (process.env.NODE_ENV === "development") {
     DOMAIN = "http://api.taswell.cn";
 }
 
+DOMAIN = "http://api.taswell.cn";
+
 axios.defaults.baseURL = DOMAIN + "/blog";
 
 axios.defaults.timeout = 1000 * 60 * 2;
