@@ -171,7 +171,6 @@ const T: React.FC = (props: any) => {
         >
           {title || "UNKONW"}
         </S.Title>
-        {uid}
         {simple && (
           <>
             {(userInfo.uid === "57855C971FF740B46EAE8F7FEBEC5D35" ||
