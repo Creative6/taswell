@@ -133,7 +133,7 @@ const T: React.FC<any> = (props: any) => {
         setLoginData(res)
         setIsLogin(true)
         GET_MY_FOLLOWS().then((rs: any) => {
-          const { following, followers } = rs
+          const { following = [], followers = [] } = rs
           const _following: any = []
           const _followers: any = []
           following.forEach((item: any) => _following.push(item.target_uid))
@@ -173,7 +173,7 @@ const T: React.FC<any> = (props: any) => {
 
   const getMyFollows = () => {
     GET_MY_FOLLOWS().then((rs: any) => {
-      const { following, followers } = rs
+      const { following = [], followers = [] } = rs
       const _following: any = []
       const _followers: any = []
       following.forEach((item: any) => _following.push(item.target_uid))

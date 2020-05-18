@@ -1,6 +1,10 @@
-import * as React from "react"
+import React, { useState, useEffect } from "react"
 import s from "styled-components"
 import Dot from "./Dot"
+import Publish from "./Publish"
+import jwt from "jwt-decode"
+import Cookies from "js-cookie"
+import { SET_ARTICLE_DELETE } from "../api"
 
 const S = {
   Content: s.div`
@@ -85,6 +89,32 @@ const S = {
         line-height: 30px;
         font-size: 20px;
     `,
+  ImgContent: s.div({
+    width: 200,
+    height: 200,
+    background: "#000",
+    marginRight: 5,
+    marginBottom: 5,
+    overflow: "hidden",
+    position: "relative",
+    cursor: "pointer",
+    transition: "all 0.2s",
+    ":hover": {
+      boxShadow: "4px 4px 10px #aaa",
+      transform: "translate(-4px,-4px)",
+    },
+  }),
+  FucBtn: s.div({
+    padding: 5,
+    transition: "all 0.2s",
+    float: "right",
+    marginLeft: 10,
+    background: "#eee",
+    cursor: "pointer",
+    ":hover": {
+      background: "#ccc",
+    },
+  }),
 }
 
 const T: React.FC = (props: any) => {
@@ -99,12 +129,26 @@ const T: React.FC = (props: any) => {
     id,
     simple,
     tag = "",
-    // uid,
+    uid,
     hidePersonInfo = false,
   } = props
 
+  const [showEditor, _showEditor] = useState<any>(false)
+  const [userInfo, setUserInfo] = useState<any>({})
+
+  useEffect(() => {
+    try {
+      // @ts-ignore
+      const data = jwt(Cookies.get("twa"))
+      setUserInfo(data)
+    } catch (e) {}
+  }, [])
+
   return (
     <S.Content>
+      {(uid === "57855C971FF740B46EAE8F7FEBEC5D35" || uid === userInfo.uid) &&
+        simple &&
+        showEditor && <Publish closeFuc={_showEditor} {...props} update />}
       {!hidePersonInfo && (
         <S.Imgbox>
           <S.Img
@@ -127,6 +171,26 @@ const T: React.FC = (props: any) => {
         >
           {title || "UNKONW"}
         </S.Title>
+        {simple && (
+          <>
+            <S.FucBtn
+              onClick={() => {
+                _showEditor(true)
+              }}
+            >
+              <i className={"iconfont icon-edit"}></i>
+            </S.FucBtn>
+            <S.FucBtn
+              onClick={() => {
+                SET_ARTICLE_DELETE({ id }).then(() => {
+                  window.location.reload()
+                })
+              }}
+            >
+              <i className={"iconfont  icon-delete"}></i>
+            </S.FucBtn>
+          </>
+        )}
         <S.Information>
           {!hidePersonInfo ? (
             <div>
@@ -150,29 +214,17 @@ const T: React.FC = (props: any) => {
           />
         )}
         {!simple && preview_img && (
-          <div style={{ marginTop: 5, overflow: "hidden", display: "flex" }}>
+          <div style={{ marginTop: 5, display: "flex" }}>
             {preview_img.length > 0 &&
               preview_img.slice(0, 3).map((item: any, index: any) => (
-                <div
+                <S.ImgContent
                   key={index}
-                  style={{
-                    width: 200,
-                    height: 200,
-                    background: "#000",
-                    marginRight: 5,
-                    marginBottom: 5,
-                    overflow: "hidden",
-                    position: "relative",
-                    cursor: "pointer",
+                  onClick={() => {
+                    window.open(item.replace("?x-oss-process=style/small", ""))
                   }}
                 >
                   <img
                     src={item}
-                    onClick={() => {
-                      window.open(
-                        item.replace("?x-oss-process=style/small", "")
-                      )
-                    }}
                     onError={(e: any) => {
                       e.target.onerror = null
                       e.target.src = "http://rs.creative6.cn/icon/badimg.png"
@@ -189,7 +241,7 @@ const T: React.FC = (props: any) => {
                   {preview_img.length > 3 && index === 2 && (
                     <S.NumTips>{preview_img.length}</S.NumTips>
                   )}
-                </div>
+                </S.ImgContent>
               ))}
           </div>
         )}
