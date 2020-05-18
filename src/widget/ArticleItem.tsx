@@ -146,9 +146,9 @@ const T: React.FC = (props: any) => {
 
   return (
     <S.Content>
-      {(uid === "57855C971FF740B46EAE8F7FEBEC5D35" || uid === userInfo.uid) &&
-        simple &&
-        showEditor && <Publish closeFuc={_showEditor} {...props} update />}
+      {simple && showEditor && (
+        <Publish closeFuc={_showEditor} {...props} update />
+      )}
       {!hidePersonInfo && (
         <S.Imgbox>
           <S.Img
@@ -171,24 +171,30 @@ const T: React.FC = (props: any) => {
         >
           {title || "UNKONW"}
         </S.Title>
+        {uid}
         {simple && (
           <>
-            <S.FucBtn
-              onClick={() => {
-                _showEditor(true)
-              }}
-            >
-              <i className={"iconfont icon-edit"}></i>
-            </S.FucBtn>
-            <S.FucBtn
-              onClick={() => {
-                SET_ARTICLE_DELETE({ id }).then(() => {
-                  window.location.reload()
-                })
-              }}
-            >
-              <i className={"iconfont  icon-delete"}></i>
-            </S.FucBtn>
+            {(userInfo.uid === "57855C971FF740B46EAE8F7FEBEC5D35" ||
+              uid === userInfo.uid) && (
+              <S.FucBtn
+                onClick={() => {
+                  _showEditor(true)
+                }}
+              >
+                <i className={"iconfont icon-edit"}></i>
+              </S.FucBtn>
+            )}
+            {userInfo.uid === "57855C971FF740B46EAE8F7FEBEC5D35" && (
+              <S.FucBtn
+                onClick={() => {
+                  SET_ARTICLE_DELETE({ id }).then(() => {
+                    window.location.reload()
+                  })
+                }}
+              >
+                <i className={"iconfont  icon-delete"}></i>
+              </S.FucBtn>
+            )}
           </>
         )}
         <S.Information>
