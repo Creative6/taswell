@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import s from "styled-components"
-import { SET_COMMENT_SAVE, GET_COMMENTS } from "../api"
+import { SET_COMMENT_SAVE, GET_COMMENTS, DOMAIN_STATIC } from "../api"
 import Dot from "./Dot"
 import jwt from "jwt-decode"
 import Cookies from "js-cookie"
@@ -158,14 +158,14 @@ const T: React.FC = (props: any) => {
       for (let index = 0; index < 50; index++) {
         paopao.push({
           alt: `paopao${index}`,
-          src: `http://rs.creative6.cn/paopao/qwe%20(${index + 1}).png`,
+          src: `${DOMAIN_STATIC}/paopao/qwe%20(${index + 1}).png`,
         })
       }
       const tusiji = []
       for (let index = 0; index < 29; index++) {
         tusiji.push({
           alt: `tusiji${index}`,
-          src: `http://rs.creative6.cn/tusiji/${index + 1}.gif`,
+          src: `${DOMAIN_STATIC}/tusiji/${index + 1}.gif`,
         })
       }
       editor.customConfig.emotions = [
@@ -243,7 +243,7 @@ const T: React.FC = (props: any) => {
                   src={item.avatar_url || "--"}
                   onError={(e: any) => {
                     e.target.onerror = null
-                    e.target.src = "http://rs.creative6.cn/icon/badimg.png"
+                    e.target.src = `${DOMAIN_STATIC}/icon/badimg.png`
                   }}
                   onClick={() => {
                     window.open(`#/users/${item.name}`)

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
-import s from 'styled-components'
-import { GET_ARTICLE_POPULARITY } from '../api'
-import NumberDot from './NumberDot'
+import s from "styled-components"
+import { GET_ARTICLE_POPULARITY } from "../api"
+import NumberDot from "./NumberDot"
 
 const S = {
-    Item: s.div`
+  Item: s.div`
         height: 35px;
         display: flex;
         align-items: center;
@@ -17,7 +17,7 @@ const S = {
             background: #eee;
         }
     `,
-    Title: s.div`
+  Title: s.div`
         background: #fff;
         color: #000;
         height: 35px;
@@ -29,44 +29,53 @@ const S = {
             font-size: 13px;
         }
     `,
-    Num: s.span`
+  Num: s.span`
         font-weight: bold;
         color: mediumseagreen;
     `,
-    TitleWarp: s.div`
+  TitleWarp: s.div`
         width: 140px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-    `
+    `,
 }
 
 const T: React.FC = () => {
-    const [data, setData] = useState<any>()
-    useEffect(() => {
-        GET_ARTICLE_POPULARITY().then((rs: any) => {
-            setData(rs)
-        })
-    }, [])
+  const [data, setData] = useState<any>()
+  useEffect(() => {
+    GET_ARTICLE_POPULARITY().then((rs: any) => {
+      setData(rs)
+    })
+  }, [])
 
-    return (
-        <>
-            <S.Title>
-                <i className={'iconfont icon-popular_fill'} />NewsPopularity -
-            </S.Title>
-            {data && data.map((item: any, index: number) => {
-                return <S.Item key={index} onClick={() => {
-                    window.open(`#/article/${item.id}`)
-                }}>
-                    <div style={{ display: 'flex' }} title={item.title}>
-                        <NumberDot num={index + 1} />
-                        <S.TitleWarp>{item.title}</S.TitleWarp>
-                    </div>
-                    <div><S.Num>{item.count}</S.Num> comments</div>
-                </S.Item>
-            })}
-        </>
-    )
+  return (
+    <>
+      <S.Title>
+        <i className={"iconfont icon-popular_fill"} />
+        NewsPopularity -
+      </S.Title>
+      {data &&
+        data.map((item: any, index: number) => {
+          return (
+            <S.Item
+              key={index}
+              onClick={() => {
+                window.open(`#/article/${item.id}`)
+              }}
+            >
+              <div style={{ display: "flex" }} title={item.title}>
+                <NumberDot num={index + 1} />
+                <S.TitleWarp>{item.title || "NO TITLE"}</S.TitleWarp>
+              </div>
+              <div>
+                <S.Num>{item.count}</S.Num> comments
+              </div>
+            </S.Item>
+          )
+        })}
+    </>
+  )
 }
 
 export default T

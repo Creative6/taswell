@@ -4,7 +4,7 @@ import Dot from "./Dot"
 import Publish from "./Publish"
 import jwt from "jwt-decode"
 import Cookies from "js-cookie"
-import { SET_ARTICLE_DELETE } from "../api"
+import { SET_ARTICLE_DELETE, DOMAIN_STATIC } from "../api"
 
 const S = {
   Content: s.div`
@@ -100,8 +100,10 @@ const S = {
     cursor: "pointer",
     transition: "all 0.2s",
     ":hover": {
-      boxShadow: "4px 4px 10px #aaa",
-      transform: "translate(-4px,-4px)",
+      // borderRadius: 2,
+      // transform: "translate(-50%,-50%) scale(0.9) !important",
+      // boxShadow: "4px 4px 10px #aaa",
+      // transform: "translate(-4px,-4px)",
     },
   }),
   FucBtn: s.div({
@@ -155,7 +157,7 @@ const T: React.FC = (props: any) => {
             src={avatar_url}
             onError={(e: any) => {
               e.target.onerror = null
-              e.target.src = "http://rs.creative6.cn/icon/badimg.png"
+              e.target.src = `${DOMAIN_STATIC}/icon/badimg.png`
             }}
             onClick={() => {
               window.open(`#/users/${name}`)
@@ -214,9 +216,7 @@ const T: React.FC = (props: any) => {
           )}
         </S.Information>
         {!simple && (preview_content || "").replace(/\s+/g, "") && (
-          <S.PreviewContent
-            dangerouslySetInnerHTML={{ __html: preview_content }}
-          />
+          <S.PreviewContent>{preview_content}</S.PreviewContent>
         )}
         {!simple && preview_img && (
           <div style={{ marginTop: 5, display: "flex" }}>
@@ -232,7 +232,7 @@ const T: React.FC = (props: any) => {
                     src={item}
                     onError={(e: any) => {
                       e.target.onerror = null
-                      e.target.src = "http://rs.creative6.cn/icon/badimg.png"
+                      e.target.src = `${DOMAIN_STATIC}/icon/badimg.png`
                     }}
                     alt=""
                     style={{
@@ -241,6 +241,7 @@ const T: React.FC = (props: any) => {
                       top: "50%",
                       transform: "translate(-50%,-50%)",
                       width: "100%",
+                      transition: "all 0.2s",
                     }}
                   />
                   {preview_img.length > 3 && index === 2 && (

@@ -2,7 +2,12 @@ import React, { useState } from "react"
 import s from "styled-components"
 import BraftEditor from "braft-editor"
 import "braft-editor/dist/index.css"
-import { UPLOAD, SET_ARTICLE_SAVE, SET_ARTICLE_UPDATE } from "../api"
+import {
+  UPLOAD,
+  SET_ARTICLE_SAVE,
+  SET_ARTICLE_UPDATE,
+  DOMAIN_STATIC,
+} from "../api"
 
 const S = {
   Content: s.div`
@@ -229,7 +234,7 @@ const T: React.FC<any> = (props: any) => {
                   const { entityMap } = arr
                   for (let key in entityMap) {
                     let url = entityMap[key].data.url
-                    if (url && url.indexOf("rs.creative6.cn") >= 0) {
+                    if (url && url.indexOf(DOMAIN_STATIC) >= 0) {
                       preview_img.push(url + "?x-oss-process=style/small")
                     }
                   }

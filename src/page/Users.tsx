@@ -7,6 +7,7 @@ import {
   GET_FOLLOWERS,
   SET_FOLLOW,
   GET_MY_FOLLOWS,
+  DOMAIN_STATIC,
 } from "../api"
 import ArticleItem from "../widget/ArticleItem"
 import Loading from "../widget/Loading"
@@ -35,7 +36,7 @@ const S: any = {
     `,
   UserInfoContent: s.div`
         position:relative;
-        background: url(http://rs.creative6.cn/34669673/1583806297795bg2.png);
+        background: url(${DOMAIN_STATIC}/34669673/1583806297795bg2.png);
         background-size: 100%;
         background-position-y: 361px;
         height: 200px;
