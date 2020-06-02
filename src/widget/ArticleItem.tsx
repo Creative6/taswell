@@ -188,9 +188,10 @@ const T: React.FC = (props: any) => {
             {userInfo.uid === "57855C971FF740B46EAE8F7FEBEC5D35" && (
               <S.FucBtn
                 onClick={() => {
-                  SET_ARTICLE_DELETE({ id }).then(() => {
-                    window.location.reload()
-                  })
+                  if (window.confirm("Delete?"))
+                    SET_ARTICLE_DELETE({ id }).then(() => {
+                      window.location.reload()
+                    })
                 }}
               >
                 <i className={"iconfont  icon-delete"}></i>
